@@ -47,6 +47,47 @@ const config = {
 };
 ```
 
+## Default Manifest
+```json
+{
+    "format_version": 2,
+    "header": {
+        "name": "§l§bStool-API",
+        "description": "Inspired Style Bot Whatsapp",
+        "uuid": "117b23ff-ea32-407e-9a30-c5f4a890d626",
+        "version": [1, 0, 0],
+        "min_engine_version": [1, 21, 20]
+    },
+    "modules": [
+        {
+            "type": "data",
+            "description": "For Support Realm and Server",
+            "uuid": "10d70681-9c08-432e-adfe-c8c5e5da18bd",
+            "version": [1, 0, 0]
+        },
+        {
+            "description": "",
+            "uuid": "59f9e579-38b3-4bce-8e20-732c2f9e82e0",
+            "version": "1.1.0-beta",
+            "type": "script",
+            "language": "javascript",
+            "entry": "scripts/nperma/index.js"
+        }
+    ],
+    "dependencies": [
+        {
+            "module_name": "@minecraft/server",
+            "version": "1.14.0-beta"
+        },
+        {
+            "module_name": "@minecraft/server-ui",
+            "version": "1.3.0-beta"
+        }
+    ],
+    "capabilities": ["script_eval"]
+}
+```
+
 ## Default Plugins
 ```javascript
 const PLUGIN_REGISTER = [
