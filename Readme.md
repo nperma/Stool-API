@@ -114,17 +114,21 @@ const PLUGIN_REGISTER = [
 ];
 ```
 
-## Examples
+## HANDLER Structure
 
-### HANDLER DEFAULT
 ```javascript
 /**
- # HANDLER
- * @type {function}
- * 
- * @arguments
- * command {string}
- * prefix {string}
+ # HANDLER STRUCTURE
+ * @type {Command<function>}
+ * @property {boolean} admin
+ * @property {string[]} commands
+ * @property {string} category
+ * @property {string[]} help
+ * @property {string[]} custom_prefix
+ * @property {boolean} no_prefix
+ * @property {afterCommand<function>} after
+ * @property {Interval<function>} interval
+ * @property {Static<function>} static
  */
 ```
 
