@@ -117,7 +117,7 @@ const PLUGIN_REGISTER = [
 ## Examples
 
 ### HANDLER DEFAULT
-```js
+```javascript
 /**
  # HANDLER
  * @type {function}
