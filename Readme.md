@@ -80,6 +80,9 @@ const PLUGIN_REGISTER = [
 
 This script is used in creating the latest servertool script addon with type NSS (`ServerTool-NSS`).
 
+### Extension
+- [ConDatabase](https://github.com/Con-JS-Development/Con-Database)
+
 ### Support Version
 latest-update: 1.21.20+
 
