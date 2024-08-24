@@ -5,35 +5,24 @@
 
 const PLUGIN_REGISTER = [
     /** @general */
-    "help-general", //done
-    "tps-general", //done
-    "about-general", //done
-    "home-general", //done
-    "sb-general", //done
-    "clearchat-general", //done
+    "help-general",
+    "tps-general",
+    "about-general",
+    "home-general",
+    "sb-general",
+    "clearchat-general",
     "warp-general",
-    "land-general",
-    "mods-general", //done
-    "online-general",
+    "mods-general",
     /** @admin */
-    "warp-admin",
-    "invsee-admin",
-    "msb-admin",
-    "teleport-admin", //done
-    /** @economy */
-    "balance-economy",
-    "pay-economy",
-    "bank-economy",
+    "teleport-admin",
     /** @logger */
-    "message-_log", //done
-    "player-_log",
-    "teleport-_log", //done
+    "message-_log",
     /** @system */
-    "join-_system", //done
-    "leave-_system", //done
-    "proto_openui-_system", //done
+    "join-_system",
+    "leave-_system",
+    "proto_openui-_system",
     /** @developer */
-    "eval-dev"//done
+    "eval-dev"
 ];
 
 /**
