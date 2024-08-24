@@ -116,7 +116,17 @@ const PLUGIN_REGISTER = [
 
 ## Examples
 
-### ***HANDLER DEFAULT***
+### HANDLER DEFAULT
+```js
+/**
+ # HANDLER
+ * @type {function}
+ * 
+ * @arguments
+ * command {string}
+ * prefix {string}
+ */
+```
 
 
 ## Creator
