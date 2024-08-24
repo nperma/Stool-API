@@ -138,6 +138,29 @@ library: `./plugins`
 
 SETDEV: `new Set(["NASRULGgindo","NpermaDev"])` isDev
 
+### HANDLER Command/Default
+type `@function` (*require)
+```readme
+### CALLBACK ARGUMENTS
+- mc = @minecraft/server
+- ui = @minecraft/server-ui
+- tools = ./extension/tools
+- sender = Sender @type {Player}
+- message = Message By Sender @type {string}
+- text = text after command @type {string}
+- prefix = prefix u used @type {string}
+- command = Command used by Sender @type {string}
+- args = Args @type {string[]}
+- isAdmin = test is sender Admin @type {boolean}
+- isDev = test is sender developer @type {boolean}
+- database = database object
+- Database = Database @type {Map}
+- attr = Plugin Default Saver @type {Command<function>}
+- attr_after = Plugin After Saver @type {AfterCommand<function>}
+- attr_interval = Plugin Interval Saver @type {Interval<function>}
+- PLUGIN_REGISTER = plugins
+```
+
 
 ## Creator
 
