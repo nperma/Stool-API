@@ -140,7 +140,7 @@ const PLUGIN_REGISTER = [
 **Path:** `scripts/nperma/index.js`  
 **Library:** `./plugins`
 
-SETDEV: `new Set(["NASRULGgindo","NpermaDev"])` - GamerTag developers.
+SETDEV: `new Set(["NASRULGgindo","NpermaDev"])` - GamerTag developers(isDev args).
 
 ### HANDLER Command/Default
 
