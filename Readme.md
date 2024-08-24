@@ -116,7 +116,7 @@ const PLUGIN_REGISTER = [
 
 ## Examples
 
-### *HANDLER DEFAULT*
+### ***HANDLER DEFAULT***
 
 
 ## Creator
