@@ -1,6 +1,6 @@
 /**
- # SERVERTOOL Nss
- * @author @Nperma
+ # ServerTOOL API
+ * @creator @Nperma
  */
 
 const PLUGIN_REGISTER = [
@@ -80,7 +80,7 @@ async function start() {
             ); //require
 
             if (!register?.default) {
-                console.warn(`Gagal register 1 ${plugin}`);
+                console.warn(`failed to register ${plugin}`);
                 continue;
             }
             register = register.default;
@@ -135,7 +135,10 @@ async function start() {
 
             db_operator["plugins_db"].set(plugin, MAP_PL.get(plugin));
         } catch (e) {
-            console.warn("Gagal Register Plugin " + plugin, e.stack);
+            console.warn(
+                "Failed to Register because error, " + plugin,
+                e.stack
+            );
             continue;
         }
     }
