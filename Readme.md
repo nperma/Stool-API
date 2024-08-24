@@ -133,8 +133,8 @@ const PLUGIN_REGISTER = [
 ```
 
 path: `scripts/nperma/index.js`
-`library: "./plugins"`
-`SETDEV: ["NASRULGgindo","NpermaDev"]` isDev
+library: `./plugins`
+SETDEV: `new Set(["NASRULGgindo","NpermaDev"])` isDev
 
 
 ## Creator
