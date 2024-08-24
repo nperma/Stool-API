@@ -6,7 +6,7 @@ warning the repo is still in the development stage but can be used so if there a
 # Configuration
 
 path: `scripts/config.js`
-```js
+```javascript
 const config = {
     /** 
   # DONT CHANGE THIS!!
