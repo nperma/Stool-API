@@ -5,7 +5,7 @@
         "description": "Inspired Style Bot Whatsapp",
         "uuid": "117b23ff-ea32-407e-9a30-c5f4a890d626",
         "version": [1, 0, 0],
-        "min_engine_version": [1, 21, 0]
+        "min_engine_version": [1, 21, 20]
     },
     "modules": [
         {
