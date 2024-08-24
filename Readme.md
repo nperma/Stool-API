@@ -50,3 +50,139 @@ const config = {
     // Under development...
 };
 ```
+
+## 📝 Default Manifest
+
+```json
+{
+    "format_version": 2,
+    "header": {
+        "name": "§l§bStool-API",
+        "description": "Inspired by WhatsApp Bot Style",
+        "uuid": "117b23ff-ea32-407e-9a30-c5f4a890d626",
+        "version": [1, 0, 0],
+        "min_engine_version": [1, 21, 20]
+    },
+    "modules": [
+        {
+            "type": "data",
+            "description": "Supports Realm and Server",
+            "uuid": "10d70681-9c08-432e-adfe-c8c5e5da18bd",
+            "version": [1, 0, 0]
+        },
+        {
+            "description": "",
+            "uuid": "59f9e579-38b3-4bce-8e20-732c2f9e82e0",
+            "version": "1.1.0-beta",
+            "type": "script",
+            "language": "javascript",
+            "entry": "scripts/nperma/index.js"
+        }
+    ],
+    "dependencies": [
+        {
+            "module_name": "@minecraft/server",
+            "version": "1.14.0-beta"
+        },
+        {
+            "module_name": "@minecraft/server-ui",
+            "version": "1.3.0-beta"
+        }
+    ],
+    "capabilities": ["script_eval"]
+}
+```
+
+## 🔌 Default Plugins
+
+```javascript
+const PLUGIN_REGISTER = [
+    /** @general */
+    "help-general",
+    "tps-general",
+    "about-general",
+    "home-general",
+    "sb-general",
+    "clearchat-general",
+    "warp-general",
+    "mods-general",
+    /** @admin */
+    "teleport-admin",
+    /** @logger */
+    "message-_log",
+    /** @system */
+    "join-_system",
+    "leave-_system",
+    "proto_openui-_system",
+    /** @developer */
+    "eval-dev"
+];
+```
+
+## ⚙️ HANDLER Structure
+
+```javascript
+/**
+ * # HANDLER STRUCTURE
+ * @type {Command<function>}
+ * @property {boolean} admin
+ * @property {string[]} commands
+ * @property {string} category
+ * @property {string[]} help
+ * @property {string[]} custom_prefix
+ * @property {boolean} no_prefix
+ * @property {afterCommand<function>} after
+ * @property {Interval<function>} interval
+ * @property {Static<function>} static
+ */
+```
+
+**Path:** `scripts/nperma/index.js`  
+**Library:** `./plugins`
+
+SETDEV: `new Set(["NASRULGgindo","NpermaDev"])` - identifies developers.
+
+### HANDLER Command/Default
+
+Type `@function` (*required)
+
+```markdown
+### CALLBACK ARGUMENTS
+- mc = @minecraft/server
+- ui = @minecraft/server-ui
+- tools = ./extension/tools
+- sender = Sender @type {Player}
+- message = Message By Sender @type {string}
+- text = Text after command @type {string}
+- prefix = Prefix used @type {string}
+- command = Command used by Sender @type {string}
+- args = Arguments @type {string[]}
+- isAdmin = Check if sender is Admin @type {boolean}
+- isDev = Check if sender is Developer @type {boolean}
+- database = Database object
+- Database = Database @type {Map}
+- attr = Plugin Default Saver @type {Command<function>}
+- attr_after = Plugin After Saver @type {AfterCommand<function>}
+- attr_interval = Plugin Interval Saver @type {Interval<function>}
+- PLUGIN_REGISTER = Plugins
+```
+
+## 👤 Creator
+
+- [Nperma](https://www.github.com/nperma)
+
+## ℹ️ About Script
+
+This script is used for creating the latest server tool script addon with type NSS (`ServerTool-NSS`).
+
+### Extension
+
+- [ConDatabase](https://github.com/Con-JS-Development/Con-Database)
+
+### Supported Version
+
+**Latest Update:** 1.21.20+  
+**Important:** Since the module uses the stable beta version, you must enable `Beta-API`.
+
+- [@minecraft/server^1.14.0-beta](https://jaylydev.github.io/scriptapi-docs/latest/modules/_minecraft_server_1_14_0_beta.html)
+- [@minecraft/server-ui^1.3.0-beta](https://jaylydev.github.io/scriptapi-docs/latest/modules/_minecraft_server_ui_1_3_0_beta.html)
