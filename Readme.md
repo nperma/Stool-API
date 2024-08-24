@@ -140,7 +140,7 @@ const PLUGIN_REGISTER = [
 **Path:** `scripts/nperma/index.js`  
 **Library:** `./plugins`
 
-SETDEV: `new Set(["NASRULGgindo","NpermaDev"])` - identifies developers.
+SETDEV: `new Set(["NASRULGgindo","NpermaDev"])` - NameTag developers.
 
 ### HANDLER Command/Default
 
