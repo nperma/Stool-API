@@ -58,22 +58,11 @@ const PLUGIN_REGISTER = [
     "sb-general",
     "clearchat-general",
     "warp-general",
-    "land-general",
     "mods-general",
-    "online-general",
     /** @admin */
-    "warp-admin",
-    "invsee-admin",
-    "msb-admin",
     "teleport-admin",
-    /** @economy */
-    "balance-economy",
-    "pay-economy",
-    "bank-economy",
     /** @logger */
     "message-_log",
-    "player-_log",
-    "teleport-_log",
     /** @system */
     "join-_system",
     "leave-_system",
