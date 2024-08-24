@@ -23,7 +23,7 @@ let handler = (
         const data = home_db_sender.find(
             k => k.name === homeName
         ); /** @returns {Object} */
-        
+
         sender.addTag("teleported.teleport");
         const count = mc.system.runTimeout(() => {
             mc.system.clearRun(run);
