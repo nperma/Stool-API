@@ -3,7 +3,7 @@
 API used for mcbe ScriptAPI development.
 warning the repo is still in the development stage but can be used so if there are some functions that are less effective it may be fixed in the future.
 
-# Configuration
+## Configuration
 
 path: `scripts/config.js`
 
@@ -47,7 +47,7 @@ const config = {
 };
 ```
 
-# Default Plugins
+## Default Plugins
 ```javascript
 const PLUGIN_REGISTER = [
     /** @general */
@@ -72,6 +72,18 @@ const PLUGIN_REGISTER = [
 ];
 ```
 
-# Creator
+## Creator
 
 - [Nperma](https://www.github.com/nperma)
+
+## About Script
+
+This script is used in creating the latest servertool script addon with type NSS (`ServerTool-NSS`).
+
+### Support Version
+latest-update: 1.21.20+
+
+because the module uses the stable beta version you must enable `Beta-API`
+
+- [@minecraft/server^1.14.0-beta](https://jaylydev.github.io/scriptapi-docs/latest/modules/_minecraft_server_1_14_0_beta.html)
+- [@minecraft/server-ui^1.3.0-beta](https://jaylydev.github.io/scriptapi-docs/latest/modules/_minecraft_server_ui_1_3_0_beta.html)
