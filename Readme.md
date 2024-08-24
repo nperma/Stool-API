@@ -6,6 +6,9 @@ warning the repo is still in the development stage but can be used so if there a
 # Configuration
 
 path: `scripts/config.js`
+
+The configuration is not supported for use in ingame because I will make this configuration only in files so as not to confuse things in development.
+
 ```javascript
 const config = {
     /** 
@@ -43,3 +46,43 @@ const config = {
     }
 };
 ```
+
+# Default Plugins
+```javascript
+const PLUGIN_REGISTER = [
+    /** @general */
+    "help-general",
+    "tps-general",
+    "about-general",
+    "home-general",
+    "sb-general",
+    "clearchat-general",
+    "warp-general",
+    "land-general",
+    "mods-general",
+    "online-general",
+    /** @admin */
+    "warp-admin",
+    "invsee-admin",
+    "msb-admin",
+    "teleport-admin",
+    /** @economy */
+    "balance-economy",
+    "pay-economy",
+    "bank-economy",
+    /** @logger */
+    "message-_log",
+    "player-_log",
+    "teleport-_log",
+    /** @system */
+    "join-_system",
+    "leave-_system",
+    "proto_openui-_system",
+    /** @developer */
+    "eval-dev"
+];
+```
+
+# Creator
+
+- [Nperma](https://www.github.com/nperma)
