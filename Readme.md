@@ -114,6 +114,11 @@ const PLUGIN_REGISTER = [
 ];
 ```
 
+## Examples
+
+### *HANDLER DEFAULT*
+
+
 ## Creator
 
 - [Nperma](https://www.github.com/nperma)
