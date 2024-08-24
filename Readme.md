@@ -44,6 +44,7 @@ const config = {
       countdown: 3,
       teleportbroadcast: true //will sent teleport to all player
     }
+    //under development...
 };
 ```
 
