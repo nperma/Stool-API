@@ -159,9 +159,7 @@ if (Object.keys(attr_static).length > 0)
             database: db_operator,
             Database,
             config,
-            tools,
-            isAdmin: player.hasTag(config.admin_tag),
-            isDev: SETDEV.has(player.name)
+            tools
         });
 
 mc.world.beforeEvents.chatSend.subscribe(ev => {
