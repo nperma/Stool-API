@@ -46,6 +46,10 @@ const config = {
     warp: {
         countdown: 3,
         teleportbroadcast: true // Broadcast teleport to all players
+    },
+    
+    message: {
+        isnotadmin: "you dont have permission to use this command!!"
     }
     // Under development...
 };
@@ -244,6 +248,46 @@ Type `@function`
 
 ### Example Usage Plugins Handler
 
+default plugin examples:
+```javascript
+//you can use module from outside the handler or you can use args from callback
+import {world} from "@minecraft/server";
+let handler = function(ev,{mc,command,text}) {
+  if (command === "mc") return mc.world.sendMessage(text)
+  else if (command === "world") return world.sendMessage(text)
+}
+
+handler.commands = 
+handler.helps = ["mc <text>","world <text>"]
+handler.category = "twst";
+```
+
+```javascript
+let handler = (ev,{sender,config,args,isAdmin,command, database}) => {
+  const balanceDB = database["balance_db"];
+  if (command === "balance") {
+    const myBalance = balanceDB.get(sender.name)??0;
+    
+    return sender.sendMessage(`§emy balance: §6${myBalance}`)
+  } else if (command === "setbalance") {
+    if (!isAdmin) return sender.sendMessage(config.message.isnotadmin)
+    
+    if (!args[0]) return sender.sendMessage(`§7pls type the amount!!`)
+    
+    if (isNaN(args[0])) return sender.sendMessage(`§camount must be number!!`)
+    
+    balanceDB.set(sender.name, args[0])
+    return sender.sendMessage(`§aset your balance to §6${args[0]}`)
+  }
+}
+
+handler.commands = ["balance","setbalance"]
+handler.helps = ["balance","setbalance <amount>"];
+handler.category = "economy";
+
+export default handler;
+```
+
 eval like:
 ```
 type in game:
@@ -263,6 +307,7 @@ let handler = function(ev,{sender,tools,text}) {
 handler.commands = ["msb","modsbroadcast"];
 handler.helps = ["msb <text>"];
 handler.admin = true; //set to true will only admin or player with tags 'config.admin_tag' can use the command
+handler.category = "admin";
 
 export default handler;
 ```
