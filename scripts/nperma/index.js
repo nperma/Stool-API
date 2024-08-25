@@ -200,7 +200,7 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
             if (handler.commands.includes(command)) {
                 if (handler?.admin && handler?.admin === true) {
                     sender.sendMessage(
-                        `you dont have permission to use this command!!`
+                        config.warn.isnotadmin
                     );
                     break;
                 }
