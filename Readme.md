@@ -253,6 +253,7 @@ default plugin examples:
 //you can use module from outside the handler or you can use args from callback
 import {world} from "@minecraft/server";
 let handler = function(ev,{mc,command,text}) {
+  if (!text) return ev.sender.sendMessage("§7pls type the text!!")
   if (command === "mc") return mc.world.sendMessage(text)
   else if (command === "world") return world.sendMessage(text)
 }
@@ -260,6 +261,23 @@ let handler = function(ev,{mc,command,text}) {
 handler.commands = 
 handler.helps = ["mc <text>","world <text>"]
 handler.category = "twst";
+
+export default handler;
+```
+
+```javascript
+//You can name the variable anything as long as it is connected and according to use, each plugin file can only export 1 variable, not more!!
+let puelli = (ev,{text,mc}) => {
+  if(!text) return ev.sender.sendMessage("§7pls type the text!!")
+  
+  const {world} = mc //advance js
+  return world.sendMessage(text)
+}
+
+puelli.commands = puelli.helps = ["tes"]
+puelli.category = "twst";
+
+export default puelli
 ```
 
 ```javascript
