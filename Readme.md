@@ -148,6 +148,37 @@ Type `@function` (*required)
 
 ```markdown
 ### CALLBACK ARGUMENTS
+**0**
+- ev = eventData.chatSend
+**1**
+- mc = @minecraft/server
+- ui = @minecraft/server-ui
+- tools = ./extension/tools
+- sender = Sender @type {Player}
+- message = Message By Sender @type {string}
+- text = Text after command @type {string}
+- prefix = Prefix used @type {string}
+- command = Command used by Sender @type {string}
+- args = Arguments @type {string[]}
+- isAdmin = Check if sender is Admin @type {boolean}
+- isDev = Check if sender is Developer @type {boolean}
+- database = Database object
+- Database = Database @type {Map}
+- attr = Plugin Default Saver @type {Command<function>}
+- attr_after = Plugin After Saver @type {AfterCommand<function>}
+- attr_interval = Plugin Interval Saver @type {Interval<function>}
+- PLUGIN_REGISTER = Plugins
+```
+
+### HANDLER After
+
+Type `@function`
+
+```markdown
+### CALLBACK ARGUMENTS 1
+**0**
+- ev = eventData.chatSend
+**1**
 - mc = @minecraft/server
 - ui = @minecraft/server-ui
 - tools = ./extension/tools
