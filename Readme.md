@@ -366,6 +366,35 @@ after example plugins:
 ```
 wait...
 ```
+
+static example plugins:
+
+```javascript
+let handler = ev=>ev;
+
+handler.static = function(mc) {
+  console.warn("RUNNING SERVER");
+  
+  mc.world.sendMessage("RUNNING SERVER");
+}
+
+export default handler;
+```
+
+```javascript
+//import {world} from "@minecraft/server"; support outside module
+
+let handler = ev => ev;
+
+handler.static = function(mc,{tools}) {
+  //u can use event on this function
+  
+  mc.world.afterEvents.playerJoin.subscribe(({playerName})=>{
+    tools.broadcast(`§g@${playerName}§e welcome on first time!!`)
+  })
+}
+
+```
 ## 👤 Creator
 
 - [Nperma](https://www.github.com/nperma)
