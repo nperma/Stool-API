@@ -118,6 +118,8 @@ const PLUGIN_REGISTER = [
     /** @developer */
     "eval-dev"
 ];
+
+// require(`${LIBRARY_DIR}/${folder}/${file}`)
 ```
 
 ## ⚙️ HANDLER Structure
