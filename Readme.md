@@ -309,10 +309,6 @@ export default handler;
 ```
 
 ```javascript
-
-```
-
-```javascript
 let handler = (ev,{sender,config,args,isAdmin,command, database}) => {
   const balanceDB = database["balance_db"];
   if (command === "balance") {
