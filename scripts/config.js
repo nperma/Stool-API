@@ -31,6 +31,10 @@ const config = {
     warp: {
       countdown: 3,
       teleportbroadcast: true //will sent teleport to all player
+    },
+    
+    message: {
+      isnotadmin: "you dont have permission to use this command!!"
     }
 };
 
