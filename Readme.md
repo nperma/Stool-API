@@ -170,7 +170,7 @@ Type `@function` (*required)
 - PLUGIN_REGISTER = Plugins
 ```
 
-### HANDLER After
+### HANDLER After/afterCommand
 
 Type `@function`
 
@@ -196,6 +196,27 @@ Type `@function`
 - attr_after = Plugin After Saver @type {AfterCommand<function>}
 - attr_interval = Plugin Interval Saver @type {Interval<function>}
 - PLUGIN_REGISTER = Plugins
+```
+
+### HANDLER Static
+
+type `@function`
+
+```markdown
+**0**
+- mc = @minecraft/server
+**1**
+- mc = @minecraft/server
+- ui = @minecraft/server-ui
+attr
+            attr_after
+            attr_static
+            attr_interval
+            PLUGIN_REGISTER
+            database
+            Database
+            config
+            tools
 ```
 
 ## 👤 Creator
