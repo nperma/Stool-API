@@ -1,7 +1,11 @@
-<h1 align="center">STOOL-API</h1>
-<p align="center">API used for Minecraft Bedrock Edition ScriptAPI development.</p>
+Here's the completed `README.md` in English:
 
-> **Warning:** This repository is still in development. While it can be used, some functions may be less effective and are subject to future improvements.
+---
+
+<h1 align="center">STOOL-API</h1>
+<p align="center">An API for Minecraft Bedrock Edition ScriptAPI development.</p>
+
+> **Warning:** This repository is still under development. While it can be used, some functions may not be fully optimized and are subject to future updates.
 
 ---
 
@@ -140,8 +144,6 @@ const PLUGIN_REGISTER = [
 **Path:** `scripts/nperma/index.js`  
 **Library:** `./plugins`
 
-SETDEV: `new Set(["NASRULGgindo","NpermaDev"])` - GamerTag developers(isDev args).
-
 ### HANDLER Command/Default
 
 Type `@function` (*required)
@@ -200,23 +202,52 @@ Type `@function`
 
 ### HANDLER Static
 
-type `@function`
+Type `@function`
 
 ```markdown
+### CALLBACK ARGUMENTS 1
 **0**
 - mc = @minecraft/server
 **1**
+- ui = @minecraft/server-ui
+- tools = ./extension/tools
+- sender = Sender @type {Player}
+- config = Config @type {Object}
+- database = Database object
+- Database = Database @type {Map}
+- PLUGIN_REGISTER = Plugins
+- attr = Plugin Default Saver @type {Command<function>}
+- attr_after = Plugin After Saver @type {AfterCommand<function>}
+- attr_static = Plugin Static Saver @type {Static<function>}
+- attr_interval = Plugin Interval Saver @type {Interval<function>}
+```
+
+### HANDLER Interval
+
+Type `@function`
+
+```markdown
+### CALLBACK ARGUMENTS
+**0**
 - mc = @minecraft/server
 - ui = @minecraft/server-ui
-attr
-            attr_after
-            attr_static
-            attr_interval
-            PLUGIN_REGISTER
-            database
-            Database
-            config
-            tools
+- tools = ./extension/tools
+- player = Player @type {Player}
+- config = Config @type {Object}
+- database = Database object
+- Database = Database @type {Map}
+- attr = Plugin Default Saver @type {Command<function>}
+- attr_after = Plugin After Saver @type {AfterCommand<function>}
+- attr_interval = Plugin Interval Saver @type {Interval<function>}
+- PLUGIN_REGISTER = Plugins
+- isAdmin = Check if player is Admin @type {boolean}
+- isDev = Check if player is Developer @type {boolean}
+```
+
+### Example Usage of HANDLER
+
+```javascript
+console.log("bruh")
 ```
 
 ## 👤 Creator
@@ -236,5 +267,11 @@ This script is used for creating the latest server tool script addon with type N
 **Latest Update:** 1.21.20+  
 **Important:** Since the module uses the stable beta version, you must enable `Beta-API`.
 
-- [@minecraft/server^1.14.0-beta](https://jaylydev.github.io/scriptapi-docs/latest/modules/_minecraft_server_1_14_0_beta.html)
-- [@minecraft/server-ui^1.3.0-beta](https://jaylydev.github.io/scriptapi-docs/latest/modules/_minecraft_server_ui_1_3_0_beta.html)
+- [@minecraft/server^1.14.0-beta](https://jaylydev.github.io/scriptapi/@minecraft/server)
+- [@minecraft/server-ui^1.3.0-beta](https://jaylydev.github.io/scriptapi/@minecraft/server-ui)
+
+## 📝 License
+
+This project is licensed under the MIT License.
+
+---
