@@ -262,7 +262,7 @@ let handler = function(ev,{sender,tools,text}) {
 
 handler.commands = ["msb","modsbroadcast"];
 handler.helps = ["msb <text>"];
-handler.admin = true; //set to true will only admin can use the command
+handler.admin = true; //set to true will only admin or player with tags 'config.admin_tag' can use the command
 
 export default handler;
 ```
