@@ -199,9 +199,7 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
 
             if (handler.commands.includes(command)) {
                 if (handler?.admin && handler?.admin === true) {
-                    sender.sendMessage(
-                        config.warn.isnotadmin
-                    );
+                    sender.sendMessage(config.message.isnotadmin);
                     break;
                 }
                 usePlugin = plugin;
