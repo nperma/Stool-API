@@ -96,6 +96,7 @@ const config = {
 ## 🔌 Default Plugins
 
 ```javascript
+//format <file>-<folder>
 const PLUGIN_REGISTER = [
     /** @general */
     "help-general",
