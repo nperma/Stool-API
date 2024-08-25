@@ -242,11 +242,32 @@ Type `@function`
 - isDev = Check if player is Developer @type {boolean}
 ```
 
-### Example Usage of HANDLER
+### Example Usage Plugins Handler
 
-```javascript
-console.log("bruh")
+eval like:
 ```
+type in game:
+> console.warn("example")
+```
+example [eval-plugin](https://github.com/nperma/Stool-API/blob/main/scripts/nperma/plugins/dev/eval.js)
+eval plugin using `property`:
+- custom_prefix
+
+admin example plugin:
+```javascript
+//attr/path: msb-admin/(admin/msb.js)
+let handler = function(ev,{sender,tools,text}) {
+  tools.broadcast(`§d@${sender.name}§g: §e${text}`,`§5§l[§dMSB§5]§r §7»§r`)
+}
+
+handler.commands = ["msb","modsbroadcast"];
+handler.helps = ["msb <text>"];
+handler.admin = true; //set to true will only admin can use the command
+
+export default handler;
+```
+
+
 
 ## 👤 Creator
 
