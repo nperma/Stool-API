@@ -362,8 +362,10 @@ handler.category = "admin";
 export default handler;
 ```
 
-
-
+after example plugins:
+```
+wait
+```
 ## 👤 Creator
 
 - [Nperma](https://www.github.com/nperma)
