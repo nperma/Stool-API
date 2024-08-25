@@ -207,7 +207,6 @@ Type `@function`
 **1**
 - ui = @minecraft/server-ui
 - tools = ./extension/tools
-- sender = Sender @type {Player}
 - config = Config @type {Object}
 - database = Database object
 - Database = Database @type {Map}
