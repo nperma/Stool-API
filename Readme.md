@@ -1,7 +1,3 @@
-Here's the completed `README.md` in English:
-
----
-
 <h1 align="center">STOOL-API</h1>
 <p align="center">An API for Minecraft Bedrock Edition ScriptAPI development.</p>
 
