@@ -280,6 +280,38 @@ puelli.category = "twst";
 export default puelli
 ```
 
+using property `custom_prefix` example:
+
+```
+type in game:
+p.say hai
+//result: hai
+
+np!say hallo
+//result: hallo
+
+!say hai
+//result: 
+```
+
+```javascript
+let handler = function(ev,{text,mc}) {
+  if(text) mc.world.sendMessage(text)
+  else ev.sender.sendMessage("-_-")
+}
+
+handler.commands = ["say"]
+handler.helps = ["say <text>"]
+handler.custom_prefix = ["p.","np!"]
+handler.category = "twst";
+
+export default handler;
+```
+
+```javascript
+
+```
+
 ```javascript
 let handler = (ev,{sender,config,args,isAdmin,command, database}) => {
   const balanceDB = database["balance_db"];
@@ -306,14 +338,14 @@ handler.category = "economy";
 export default handler;
 ```
 
-eval like:
+example eval plugin:
 ```
 type in game:
 > console.warn("example")
 ```
 example [eval-plugin](https://github.com/nperma/Stool-API/blob/main/scripts/nperma/plugins/dev/eval.js)
 eval plugin using `property`:
-- custom_prefix
+- no_prefix
 
 admin example plugin:
 ```javascript
