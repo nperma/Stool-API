@@ -364,7 +364,7 @@ export default handler;
 
 after example plugins:
 ```
-wait
+wait...
 ```
 ## 👤 Creator
 
