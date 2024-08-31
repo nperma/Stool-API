@@ -1,0 +1,26 @@
+name: Restrict Edits to ./nperma Directory
+
+on:
+  pull_request:
+    paths:
+      - 'nperma/**'
+      - '!nperma/index.js'
+
+jobs:
+  check_changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check for Disallowed Changes
+        run: |
+          git diff --name-only ${{ github.event.before }} ${{ github.sha }} > changes.txt
+          if grep -q "nperma/index.js" changes.txt; then
+            echo "Error: Changes to nperma/index.js are not allowed." >&2
+            exit 1
+          fi
+          if ! grep -q "^nperma/" changes.txt; then
+            echo "Error: Only changes to the nperma directory are allowed." >&2
+            exit 1
+          fi
