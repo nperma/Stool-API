@@ -1,47 +1,9 @@
 import * as mc from "@minecraft/server";
 import config from "../../config.js";
 
-//check tps
-export const checkTPS = async () => {
-    let start = Date.now();
-    await mc.system.waitTicks(20);
-    let duration = Date.now() - start;
-    let tps = (20 / (duration / 1000)).toFixed(2);
-    return tps;
-};
-
-//sleep
-export const sleep = async second => await mc.system.waitTicks(second * 20);
-
-//broadcast
-export const broadcast = (text, title = config.default_title) => {
-    mc.world.sendMessage(`${title}${text}`);
-};
-
-//setScore
-export const setScore = (player, objective, score) =>
-    mc.world.scoreboard.getObjective(objective).setScore(player, score);
-
-//getScore
-export const getScore = (player, objective) =>
-    mc.world.scoreboard.getObjective(objective).getScore(player);
-
-//addScore
-export const addScore = (player, objective, score) =>
-    mc.world.scoreboard.getObjective(objective).addScore(player, score);
-
-//forceOpen
-export const forceOpen = async (player, form) => {
-    while (true) {
-        const r = await form.show(player);
-        if (r.cancelationReason !== "UserBusy") return r;
-    }
-};
-
 export const numericNumber = function (value) {
-    const symbols = config.numeric_sysmbol;
+    const symbols = config.numericSysmbol;
     let tier = 0;
-
     while (value >= 1000 && tier < symbols.length - 1) {
         value /= 1000;
         tier++;
@@ -51,16 +13,26 @@ export const numericNumber = function (value) {
 };
 
 const mathround = x => Math.round(x * 1000) / 1000;
-export const isMoving = entity => {
-    if (!(entity instanceof mc.Entity || entity instanceof mc.Player))
-        throw new TypeError("arguments[0] must be Player or Entity");
 
-    const vec = {
-        x: mathround(entity.getVelocity().x),
-        y: mathround(entity.getVelocity().y),
-        z: mathround(entity.getVelocity().z)
-    };
-
-    if (vec.x === 0 && vec.y === 0 && vec.z === 0) return false;
-    else return true;
-}; /** @returns {boolean} */
+export const tpTimeout = (player, data, timeout = 100) => {
+  if (player.getDynamicProperty("teleporting")) return player.sendMessage(`§cYou have pending teleportation, move to cancel`)
+  player.setDynamicProperty("teleporting", true)
+  
+  player.sendMessage(`§aDon't move you will be teleported to §e${data.name}`)
+  const tp = mc.system.runTimeout(() => {
+    mc.system.clearRun(tp)
+    mc.system.clearRun(cancel)
+    player.sendMessage(`§aTeleported to §e${data.name}`)
+    player.teleport(data.pos)
+    player.setDynamicProperty("teleporting", false)
+  }, timeout)
+  
+  const cancel = mc.system.runInterval(() => {
+    if (isMoving(player)) {
+      mc.system.clearRun(tp)
+      mc.system.clearRun(cancel)
+      player.sendMessage(`§cPending teleportation has been canceled for moving`)
+    player.setDynamicProperty("teleporting", false)
+    }
+  })
+}

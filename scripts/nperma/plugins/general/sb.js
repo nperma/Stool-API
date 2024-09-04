@@ -1,18 +1,13 @@
-let handler = (ev, { tools, text, sender, database }) => {
-    if (!database["balance_db"])
-        return sender.sendMessage(`§7Wait Economy System...`);
-        const myMoney = database["balance_db"].get(sender.name);
-        
-        if (myMoney >= 20000) {
-    tools.broadcast(
-        `§g@${sender.name} §a: §r${text?.replace(/§[0-9a-zA-Z]/g, "")}`
-    );
-    database["balance_db"].set(sender.name, myMoney- 20000)
-        } else sender.sendMessage(`§cYou dont Have enough balance to use this command!!`)
+let handler = (ev, { tools, text, sender, command, config }) => {
+  const money = sender.getBalance()
+  if (text == "") return sender.fail("The text field must be filled")
+  if (money < 20000) return sender.fail(`You don't have enough money to use ${command}, you need at least 20000 to use ${command}`)
+  sender.broadcast(`§g@${sender.name} §a: §r${text?.replace(/§[0-9a-zA-Z]/g, "")}`)
+  sender.setBalance(money - 20000)
 };
 
 handler.commands = ["sb", "bc", "broadcast"];
-handler.helps = ["sb <text>", "broadcast <text>"];
+handler.helps = ["sb <text>", "bc <text>", "broadcast <text>"];
 handler.category = "general";
 
 export default handler;

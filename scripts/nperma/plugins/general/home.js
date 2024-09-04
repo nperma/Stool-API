@@ -1,114 +1,70 @@
 let handler = (
     ev,
-    { database, Database, mc, ui, sender, args, command, tools, config }
+    { database, Database, mc, sender, args, command, prefix, config }
 ) => {
-    if (!database["home_db"]) database["home_db"] = new Database("home_db");
-    const home_db = database["home_db"];
-    /** @type {Map} */
-    const home_db_sender = database["home_db"].get(sender.name) || [];
-    const homelimit = Object.entries(config.home.homelimit)
-        .sort(([, a], [, b]) => b - a)
-        .find(([k]) => sender.hasTag(k));
-    let homeName = args[0]?.toLowerCase();
+    if (!database.homeDb) database.homeDb = new Database("home_db")
+    const homeDb = database.homeDb;
+    const playerHome = homeDb.get(sender.id) || [];
 
-    /** @type {Array} */
-    if (command === "home") {
-        if (!homeName) return sender.sendMessage(`§7pls type the homeName!!`);
+    const homeLimit = Object.entries(config.home.homelimit)
+    .find(([tag]) => sender.hasTag(tag))[1]
 
-        if (!home_db_sender.map(k => k?.name).includes(homeName))
-            return sender.sendMessage(
-                `§7you dont have home with name '${homeName}'`
-            );
-
-        const data = home_db_sender.find(
-            k => k.name === homeName
-        ); /** @returns {Object} */
-
-        sender.addTag("teleported.teleport");
-        const count = mc.system.runTimeout(() => {
-            mc.system.clearRun(run);
-            mc.system.clearRun(count);
-            sender.teleport(data.location, {
-                dimension: mc.world.getDimension(data.dimension)
-            });
-            sender.sendMessage(`§aSuccess Teleport to §2'${data.name}'`);
-        }, config.home.countdown * 20);
-
-        const run = mc.system.runInterval(() => {
-            if (tools.isMoving(sender)) {
-                mc.system.clearRun(run);
-                mc.system.clearRun(count);
-                sender.sendMessage(`§7cancel teleport because u move!!`);
-            }
-        });
-    } else if (command === "listhome") {
-        if (home_db_sender?.length === 0)
-            sender.sendMessage("§cYou dont have any home register!!");
-        else {
-            const homelist = home_db_sender.map(va => {
-                const { name, location, dimension } = va;
-
-                let loc = {
-                    x: location.x.toFixed(1),
-                    y: location.y,
-                    z: location.z.toFixed(1)
-                };
-
-                return `§b- §e${name} : ${loc.x} ${loc.y} ${loc.z}, ${dimension}`;
-            });
-            sender.sendMessage(
-                `§gHOME-LIST(§e${
-                    homelimit - home_db_sender.length
-                }§g§6${homelimit}§e):\n${homelist.join("\n")}`
-            );
-        }
-    } else if (command === "sethome") {
-        if (!homeName) return sender.sendMessage(`§7pls type the homeName!!`);
-
-        if (home_db_sender.map(k => k?.name).includes(homeName))
-            return sender.sendMessage(`§cyou already register this homeName!!`);
-
-        if (home_db_sender.length >= homelimit)
-            return sender.sendMessage(
-                `§Your home limit has reached the limit!!`
-            );
-
-        const data = {
-            name: homeName,
-            location: sender.location /** @returns {Vector3} */,
-            dimension: sender.dimension.id,
-            date: new Date().toLocaleString()
-        };
-
-        home_db.set(sender.name, [data, ...home_db_sender]); //register Home
-        sender.sendMessage(`§aSuccess create home with name §2'${homeName}'`);
-        sender.playSound("random.pop");
-    } else if (command === "delhome") {
-        if (!homeName) return sender.sendMessage(`§7pls type the homeName!!`);
-
-        if (!home_db_sender.map(k => k?.name).includes(homeName))
-            return sender.sendMessage(
-                `§7you dont have home with name '${homeName}'`
-            );
-
-        home_db.set(
-            sender.name,
-            home_db_sender.filter(k => k.name !== homeName)
-        ); //delete register home
-        sender.sendMessage(`§asuccess delete home with name §2'${homeName}'`);
-        sender.playSound("random.anvil_break");
+    const homeName = args[0]?.toLowerCase().replace(/§.{1}/g);
+    const errorMsg = "Please specify the home name!"
+    
+    if (command == "home") {
+      if (!homeName || args.length > 1) return sender.fail(errorMsg)
+      
+      const home = playerHome.find(f => f.name == homeName)
+      if (!home) return sender.fail(`Home not found!`)
+      
+      sender.tpTimeout(home, config.home.countdown * 20)
+      
+    } else if (command == "sethome") {
+    
+      if (!homeName || args.length > 1) return sender.fail(errorMsg)
+      
+      if (playerHome.length >= homeLimit) return sender.fail("You can't make more home, you've reached the limit")
+      
+      const home = playerHome.find(f => f.name == homeName)
+      if (home) return sender.fail(`Home already created with that name! please use other name`)
+      
+      const data = {
+        name: homeName,
+        pos: sender.location,
+        dimension: sender.dimension.id
+      }
+      
+      homeDb.set(sender.id, [data, ...playerHome])
+      sender.succes(`Succesfully created home with name ${homeName} in ${sender.dimension.id.slice(10)}`)
+      
+    } else if (command == "delhome") {
+    
+      if (playerHome.length == 0) return sender.fail("You can't delete any home if YOU'RE NOT HAVE ANY HOME")
+      if (!homeName || args.length > 1) return sender.fail(errorMsg)
+      
+      const home = playerHome.find(f => f.name == homeName)
+      if (!home) return sender.fail("You don't have home with that name")
+      
+      homeDb.set(sender.id, playerHome.filter(f => f.name != home.name))
+      sender.succes(`Succesfully deleting home with name ${home.name}`)
+      
+    } else if (command == "homes") {
+    
+      if (playerHome.length == 0) return sender.fail("Actually, you don't have any home SO I CAN'T GIVE YOU THE LIST")
+      let text = `§a//=== §eList of Home §a===//\n`
+      let homes = playerHome.map((m, i) => `§7${i + 1}. §e${prefix}home ${m.name} §6> §c${Math.formatPos(m.pos, 2)} §7|§6 ${m.dimension.slice(10)} §7|§6 ${i + 1} out of ${homeLimit}`).join("\n")
+      sender.tell(text + homes, true)
     }
 };
 
-handler.commands = ["home", "sethome", "delhome", "listhome"];
-
+handler.commands = ["home", "sethome", "delhome", "homes"];
 handler.helps = [
     "home <homeName>",
     "sethome <homeName>",
     "delhome <homeName>",
-    "listhome"
+    "homes"
 ];
-
 handler.category = "general";
 
 export default handler;

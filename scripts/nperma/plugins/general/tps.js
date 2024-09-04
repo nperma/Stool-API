@@ -1,5 +1,5 @@
-let handler = async (ev, { sender, tools }) =>
-    sender.sendMessage(`§aTPS now: ${await tools.checkTPS()}`);
+let handler = async (ev, { mc, sender }) =>
+    sender.sendMessage(`§aTPS now: ${await mc.system.getTps()}`);
 
 handler.commands = handler.helps = ["tps"];
 handler.category = "general";
