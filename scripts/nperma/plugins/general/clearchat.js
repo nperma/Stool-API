@@ -1,7 +1,7 @@
 let nanda = (ev, { sender, command }) => {
     let i = 0;
     while (i <= 100) {
-        sender.sendMessage(i < 100 ? "\n" : `§asuccess ${command}`);
+    sender.tell(i < 100 ? "\n" : `§asuccess ${command}`, true);
         i++;
     }
 };
