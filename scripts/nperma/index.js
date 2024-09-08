@@ -2,28 +2,8 @@
  # ServerTOOL API
  * @creator @Nperma
  */
-
-const PLUGIN_REGISTER = [
-    /** @general */
-    "help-general",
-    "tps-general",
-    "about-general",
-    "home-general",
-    "sb-general",
-    "clearchat-general",
-    "warp-general",
-    "mods-general",
-    /** @admin */
-    "teleport-admin",
-    /** @logger */
-    "message-_log",
-    /** @system */
-    "join-_system",
-    "leave-_system",
-    "proto_openui-_system",
-    /** @developer */
-    "eval-dev"
-];
+import * as nanda from "./register.js";
+const PLUGIN_REGISTER = nanda.default;
 
 /**
  # HANDLER STRUCTURE
@@ -31,7 +11,7 @@ const PLUGIN_REGISTER = [
  * @property {boolean} admin
  * @property {string[]} commands
  * @property {string} category
- * @property {string[]} help
+ * @property {string[]} helps
  * @property {string[]} custom_prefix
  * @property {boolean} no_prefix
  * @property {afterCommand<function>} after
@@ -41,11 +21,15 @@ const PLUGIN_REGISTER = [
 import * as mc from "@minecraft/server";
 import * as ui from "@minecraft/server-ui";
 import { JsonDatabase as Database } from "./extension/database.js";
+export { Database };
 import config from "../config.js";
+import LoadSender from "./extension/sender.js";
+import LoadServer from "./extension/server.js"
 import * as tools from "./extension/tools.js";
+
 /** @PREPARE_SPOT */
 
-const LIBRARY_DIR = "./plugins",
+export const LIBRARY_DIR = "./plugins",
     SETDEV = new Set(["NASRULGgindo", "NpermaDev"]);
 
 const warnM = console.warn;
@@ -56,7 +40,7 @@ const errorM = console.error;
 console.error = (...args) => errorM("[SERVERTOOL-ERROR]: ", ...args);
 
 /** @DATABASE_SPOT */
-let db_operator = {};
+export let db_operator = {};
 const db_key = ["plugins", "manage", "balance", "player"];
 db_key
     .filter(k => !db_operator[k + "_db"])
@@ -66,10 +50,10 @@ db_key
     });
 
 /** @STARTER_SPOT */
-let attr = {};
-let attr_after = {};
-let attr_interval = {};
-let attr_static = {};
+export let attr = {},
+    attr_after = {},
+    attr_interval = {},
+    attr_static = {};
 const MAP_PL = new Map();
 async function start() {
     for (const plugin of PLUGIN_REGISTER) {
@@ -78,6 +62,7 @@ async function start() {
             let register = await import(
                 `${LIBRARY_DIR}/${folder_path}/${file_path}`
             ); //require
+            register;
 
             if (!register?.default) {
                 console.warn(`failed to register ${plugin}`);
@@ -85,6 +70,13 @@ async function start() {
             }
             register = register.default;
             if (!attr[plugin]) attr[plugin] = register;
+
+            if (
+                register?.static &&
+                typeof register?.static === "function" &&
+                !attr_static[plugin]
+            )
+                attr_static[plugin] = register?.static;
 
             if (
                 register?.after &&
@@ -100,18 +92,12 @@ async function start() {
             )
                 attr_interval[plugin] = register?.interval;
 
-            if (
-                register?.static &&
-                typeof register?.static === "function" &&
-                !attr_static[plugin]
-            )
-                attr_static[plugin] = register?.static;
-
             if (!MAP_PL.has(plugin))
                 MAP_PL.set(plugin, {
-                    commands: register.commands,
-                    category: register.category,
+                    commands: register?.commands,
+                    category: register?.category ?? plugin.split("-")[1],
                     custom_prefix: register?.custom_prefix ?? null,
+                    helps: register?.helps ?? [],
                     no_prefix: register?.no_prefix ?? false,
                     admin: register?.admin ?? false
                 });
@@ -137,34 +123,49 @@ async function start() {
         } catch (e) {
             console.warn(
                 "Failed to Register because error, " + plugin,
-                e.stack
+                e ? `\n${e}` : "",
+                e.stack ? `\n${e.stack}` : ""
             );
             continue;
         }
     }
 }
 
-start();
+let server = LoadServer(mc.world.getDimension("overworld"));
 
-if (Object.keys(attr_static).length > 0)
-    for (const pl_static of Object.keys(attr_static))
-        attr_static[pl_static].call(this, mc, {
-            mc,
-            ui,
-            attr,
-            attr_after,
-            attr_static,
-            attr_interval,
-            PLUGIN_REGISTER,
-            database: db_operator,
-            Database,
-            config,
-            tools
-        });
+start().then(() => {
+    if (Object.keys(attr_static).length > 0)
+        for (const plugin_static of Object.keys(attr_static))
+            attr_static[plugin_static].call(this, mc, {
+                mc,
+                ui,
+                attr,
+                tools,
+                server,
+                attr_after,
+                attr_interval,
+                attr_static,
+                database: db_operator,
+                Database,
+                PLUGIN_REGISTER
+            });
+});
 
 mc.world.beforeEvents.chatSend.subscribe(ev => {
     let usePlugin = "";
-    const { sender, message } = ev;
+    const { sender: pppp, message } = ev;
+    let sender = LoadSender([
+        pppp,
+        {
+            config,
+            mc,
+            ui,
+            database:db_operator,
+            Database,
+            tools
+        }
+    ]);
+
     let usePrefix = config.prefix.find(k => message.startsWith(k));
 
     for (const plugin of Array.from(db_operator["plugins_db"].keys())) {
@@ -198,7 +199,12 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                 .toLowerCase();
 
             if (handler.commands.includes(command)) {
-                if (handler?.admin && handler?.admin === true) {
+                if (
+                    handler?.admin &&
+                    typeof handler?.admin === "boolean" &&
+                    handler?.admin === true &&
+                    !sender.hasTag(config.admin_tag)
+                ) {
                     sender.sendMessage(config.message.isnotadmin);
                     break;
                 }
@@ -209,8 +215,8 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
         }
     }
 
+    ev.cancel = true;
     if (usePlugin) {
-        ev.cancel = true;
         mc.system.run(() => {
             const isAdmin = sender.hasTag(config.admin_tag),
                 isDev = SETDEV.has(sender.name),
@@ -220,32 +226,11 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                     .split(" "),
                 command = args.shift().toLowerCase();
             let text = args.slice(0).join(" ");
-            /**
-           # CALLBACK ARGS
-           * 
-           * how to use:
-           * @type {handler = (mc,{args}) => {}}
-           * @param {@minecraft/server} mc
-           * @param {Player} sender
-           * @param {string} message
-           * @param {@minecraft/server-ui} ui
-           * @param {boolean} isAdmin
-           * @param {boolean} isDev
-           * @param {Database[]} database
-           * @param {plugin[]} attr
-           * @param {plugin_after[]} attr_after
-           * @param {plugin_interval[]} attr_interval
-           * @param {string} command
-           * @param {string} prefix
-           * @param {string[]} args
-           * @param {string} text
-           * @param {object} config
-           * @param {Map} Database
-           * 
-           **/
+
             attr[usePlugin].call(this, ev, {
                 sender,
                 message,
+                server,
                 ui,
                 mc,
                 attr,
@@ -264,10 +249,33 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                 Database
             });
         });
-    }
+    } else {
+        const ranks = [
+                config.default_rank,
+                ...sender
+                    .getTags()
+                    .filter(k => k.startsWith(config.default_prefix_rank))
+            ],
+            rank = ranks[ranks - 1]; //get current rank
 
+        mc.world.sendMessage(
+            config.default_format_chat
+                ?.replaceAll(
+                    "@RANKS",
+                    ranks
+                        .sort((a, b) => b - a)
+                        .map(
+                            r =>
+                                `${config.prefix_rank}${r}${config.suffix_rank}`
+                        )
+                        .join(" ")
+                )
+                ?.replaceAll("@NAME", sender.name)
+                ?.replaceAll("@MSG", message)
+        );
+    }
     if (Object.keys(attr_after).length > 0) {
-        for (const plugin_after of Object.keys(attr_after)) {
+        for (const plugin_after of Object.keys(attr_after))
             mc.system.run(() => {
                 const isAdmin = sender.hasTag(config.admin_tag),
                     isDev = new Set(["NASRULGgindo", "NpermaDev"]).has(
@@ -279,12 +287,13 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                         .split(" "),
                     command = args.shift().toLowerCase();
                 let text = args.slice(0).join(" ");
-                /** @underDevelopment */
+
                 attr_after[plugin_after].call(this, ev, {
                     mc,
                     sender,
                     message,
                     ui,
+                    server,
                     args,
                     prefix: usePrefix,
                     command,
@@ -301,7 +310,6 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                     attr_interval
                 });
             });
-        }
     }
 });
 
@@ -316,6 +324,7 @@ mc.system.runInterval(() => {
                     attr,
                     attr_after,
                     attr_interval,
+                    server,
                     PLUGIN_REGISTER,
                     database: db_operator,
                     Database,
