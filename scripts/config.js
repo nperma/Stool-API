@@ -16,6 +16,13 @@ const config = {
     },
     default_title: "§l§2[§aSERVERTOOL§l§2]§r §7»§r ",
     default_balance: 2000,
+
+    //rank configuration
+    default_prefix_rank: "rank:",
+    default_rank: "MEMBER",
+    prefix_rank: "§7§l[",
+    suffix_rank: "§r§7§l]",
+    default_format_chat: "@RANKS§r §g@@NAME §r§7» @MSG",
     numeric_sysmbol: ["", "k", "M", "B", "T"],
     home: {
         countdown: 3, //3second
@@ -28,13 +35,29 @@ const config = {
             legend: 12
         }
     },
-    warp: {
-      countdown: 3,
-      teleportbroadcast: true //will sent teleport to all player
+
+    default_time: {
+        utc: "id-ID",
+        offset: 7 * 60, //offsetTimeZone, default WIB
+        timezone: "asia/Jakarta"
     },
-    
+    warp: {
+        cooldown: 3,
+        teleportbroadcast: true //will sent teleport to all player
+    },
+
+    land: {
+        tools: {
+            checkland: "minecraft:stick",
+            setpos: "minecraft:golden_shovel"
+        },
+        price_per_block: 100,
+        sell_tax: 30 //percent
+    },
+
     message: {
-      isnotadmin: "you dont have permission to use this command!!"
+        isnotadmin: "you dont have permission to use this command!!",
+        isnotdev: "You are not a developer!!"
     }
 };
 
