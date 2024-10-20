@@ -76,6 +76,7 @@ handler.helps = ["command_name <required_arg>"];
 handler.category = "category_name";
 handler.admin = false; // set to true if only admins can use
 handler.custom_prefix = ["!", "/"]; // optional custom prefixes
+handler.no_prefix = false // set to true if you want no prefix
 ```
 
 - **handler.commands**: An array of strings representing command names.
@@ -83,6 +84,7 @@ handler.custom_prefix = ["!", "/"]; // optional custom prefixes
 - **handler.category**: Defines which category the command belongs to.
 - **handler.admin**: Boolean that determines if the command is restricted to admins.
 - **handler.custom_prefix**: An array of custom prefixes the command can use.
+- **handler.no_prefix**: Boolean to make the plugin use no prefix
 
 ---
 
@@ -91,7 +93,7 @@ handler.custom_prefix = ["!", "/"]; // optional custom prefixes
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/nperma/STOOL-API.git
+git clone https://github.com/nperma/Stool-API.git
 ```
 
 2. Install dependencies:
