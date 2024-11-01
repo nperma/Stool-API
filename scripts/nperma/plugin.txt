@@ -1,0 +1,141 @@
+**ID:**
+
+```
+Plugin
+================================================================================
+
+Handler
+--------
+Plugin ini mendukung berbagai pendekatan dalam mendefinisikan fungsi handler, termasuk:
+
+1. **Function Expression**:
+   - Didefinisikan menggunakan variabel `let`:
+   ```javascript
+   let handler = function() {
+       // kode di sini
+   };
+   ```
+   - Function expression memungkinkan fleksibilitas dalam mengatur kapan dan bagaimana fungsi digunakan.
+
+2. **Arrow Function**:
+   - Mendukung penulisan fungsi yang lebih ringkas menggunakan arrow function:
+   ```javascript
+   let handler = () => {
+       // kode di sini
+   };
+   ```
+   - Arrow function cocok untuk penulisan fungsi yang tidak membutuhkan konteks `this` dan untuk kasus di mana penulisan singkat diperlukan.
+
+3. **Function Declaration (Let)**:
+   - Meskipun function declaration tradisional tidak menggunakan `let`, kita juga bisa mendefinisikan fungsi menggunakan `let` dengan pendekatan berikut:
+   ```javascript
+   let handler = function handler() {
+       // kode di sini
+   };
+   ```
+   - Cocok digunakan ketika kita ingin fungsi dapat diberi nama untuk tujuan debugging atau rekursi.
+
+Cabang-Cabang Plugin
+---------------------
+1. **Default (Command)**:
+   - Cabang default diidentifikasi dengan `command`.
+   - Cabang ini dijalankan ketika perintah tertentu terdeteksi dan digunakan untuk fungsi utama plugin.
+
+2. **After**:
+   - Cabang ini berjalan setelah eksekusi tertentu tanpa aturan ketat tentang urutan.
+   - Cocok untuk menjalankan tugas post-process atau event tambahan.
+
+3. **Static (Void)**:
+   - Cabang yang tidak menghasilkan nilai atau respons (void).
+   - Digunakan untuk fungsi statis yang tidak memerlukan interaksi lebih lanjut, seperti inisialisasi atau setup.
+
+4. **Interval**:
+   - Cabang yang berfungsi untuk tugas-tugas periodik.
+   - Umumnya digunakan untuk scheduling atau pemantauan yang membutuhkan eksekusi berulang dalam interval waktu tertentu.
+
+Sistem Module
+-------------
+Plugin ini menggunakan sistem module `esm` (ECMAScript Modules) untuk export dan import.
+Fungsi atau variabel utama diekspor menggunakan:
+
+```javascript
+export default variabel;
+```
+
+Kesimpulan
+----------
+Plugin ini mendukung berbagai macam metode penulisan fungsi (function expression, arrow function, function declaration dengan `let`). Dengan cabang-cabang seperti `command`, `after`, `static`, dan `interval`, plugin ini fleksibel untuk berbagai skenario pengembangan. Sistem `esm` juga mempermudah modularitas dalam pengembangan.
+```
+
+---
+
+**EN:**
+
+```
+Plugin
+================================================================================
+
+Handler
+--------
+This plugin supports various approaches for defining function handlers, including:
+
+1. **Function Expression**:
+   - Defined using a `let` variable:
+   ```javascript
+   let handler = function() {
+       // code here
+   };
+   ```
+   - Function expression allows flexibility in managing when and how the function is used.
+
+2. **Arrow Function**:
+   - Supports more concise function writing using arrow functions:
+   ```javascript
+   let handler = () => {
+       // code here
+   };
+   ```
+   - Arrow functions are suitable for situations where the `this` context is not needed and for short, clean syntax.
+
+3. **Function Declaration (Let)**:
+   - While traditional function declarations don’t use `let`, you can still declare functions using `let` as follows:
+   ```javascript
+   let handler = function handler() {
+       // code here
+   };
+   ```
+   - Useful when you want to name the function for debugging or recursion purposes.
+
+Plugin Branches
+---------------
+1. **Default (Command)**:
+   - The default branch is identified by `command`.
+   - It runs when a specific command is detected and is used for the primary plugin function.
+
+2. **After**:
+   - This branch executes without strict ordering after a specific command or event.
+   - Suitable for post-process tasks or additional events.
+
+3. **Static (Void)**:
+   - A branch that does not return a value or response (void).
+   - Used for static functions that don’t require further interaction, such as initialization or setup.
+
+4. **Interval**:
+   - A branch designed for periodic tasks.
+   - Commonly used for scheduling or monitoring tasks that need to be executed repeatedly at certain intervals.
+
+Module System
+-------------
+This plugin uses the `esm` (ECMAScript Modules) system for exporting and importing functions and variables.
+To export the main function or variable, use:
+
+```javascript
+export default variable;
+```
+
+Conclusion
+----------
+This plugin supports various function writing methods (function expression, arrow function, function declaration with `let`). With branches like `command`, `after`, `static`, and `interval`, the plugin is flexible for different development scenarios. The `esm` system also enhances modularity in development.
+```
+
+generated by ChatGPT

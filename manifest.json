@@ -1,11 +1,19 @@
 {
     "format_version": 2,
     "header": {
+<<<<<<< HEAD
         "name": "§l§bStool-API",
         "description": "Inspired Style Bot Whatsapp",
         "uuid": "117b23ff-ea32-407e-9a30-c5f4a890d626",
         "version": [1, 0, 0],
         "min_engine_version": [1, 21, 20]
+=======
+        "name": "§l§6ServerTOOL-NSS",
+        "description": "Original",
+        "uuid": "117b23ff-ea32-407e-9a30-c5f4a890d626",
+        "version": [1, 0, 5],
+        "min_engine_version": [1, 21, 40]
+>>>>>>> ebcc790 (Upload folder)
     },
     "modules": [
         {
@@ -26,7 +34,11 @@
     "dependencies": [
         {
             "module_name": "@minecraft/server",
+<<<<<<< HEAD
             "version": "1.14.0-beta"
+=======
+            "version": "1.16.0-beta"
+>>>>>>> ebcc790 (Upload folder)
         },
         {
             "module_name": "@minecraft/server-ui",

@@ -7,9 +7,20 @@ let handler = function(ev,{sender,args,mc,database}) {
   if (!target) return sender.sendMessage("§7target is offline");
   
   sender.teleport(target.location, {dimension:mc.world.getDimension(target.dimension.id)})
+<<<<<<< HEAD
   sender.sendMessage(`§aTeleport to ${args[0]}`)
+=======
+  sender.sendMessage(`§7» §aTeleport to ${args[0]}`)
+>>>>>>> ebcc790 (Upload folder)
 }
 
 handler.admin = true;
 handler.commands = ["tp","teleport"];
+<<<<<<< HEAD
 handler.helps = ["teleport <playerName>"]
+=======
+handler.helps = ["teleport <playerName>"]
+handler.category = "admin"
+
+export default handler
+>>>>>>> ebcc790 (Upload folder)
