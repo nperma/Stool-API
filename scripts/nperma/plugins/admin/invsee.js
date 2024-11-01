@@ -41,15 +41,7 @@ let handler = (ev, { mc, sender, args }) => {
     }
 
     return sender.sendMessage(
-<<<<<<< HEAD
-<<<<<<< HEAD
-        `§aINVENTORY §2${sender.name}§a:\n${Object.entries(slot)
-=======
         `§7» §aINVENTORY §2${sender.name}§a:\n${Object.entries(slot)
->>>>>>> ebcc790 (Upload folder)
-=======
-        `§7» §aINVENTORY §2${sender.name}§a:\n${Object.entries(slot)
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
             .map(
                 ([t, v]) =>
                     `§bx- ${t.toUpperCase()}: §e${
