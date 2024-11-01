@@ -65,7 +65,10 @@ export const isMoving = entity => {
     else return true;
 }; /** @returns {boolean} */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 
 export function parseItem(json) {
     if (typeof json == "string") {
@@ -167,4 +170,7 @@ export function getDataItem(player, item, slot) {
 export function useSymbol(text) {
     return /[^a-zA-Z0-9\s]/g.test(text);
 }
+<<<<<<< HEAD
 >>>>>>> ebcc790 (Upload folder)
+=======
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)

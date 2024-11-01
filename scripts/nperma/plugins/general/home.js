@@ -6,10 +6,14 @@ let handler = (
     const home_db = database["home_db"];
     /** @type {Map} */
 <<<<<<< HEAD
+<<<<<<< HEAD
     const home_db_sender = database["home_db"].get(sender.name) || [];
 =======
     const home_db_sender = database["home_db"].get(sender.id) || [];
 >>>>>>> ebcc790 (Upload folder)
+=======
+    const home_db_sender = database["home_db"].get(sender.id) || [];
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
     const homelimit = Object.entries(config.home.homelimit)
         .sort(([, a], [, b]) => b - a)
         .find(([k]) => sender.hasTag(k));
@@ -28,11 +32,15 @@ let handler = (
             k => k.name === homeName
         ); /** @returns {Object} */
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         sender.addTag("teleported.teleport");
 =======
         
 >>>>>>> ebcc790 (Upload folder)
+=======
+        
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
         const count = mc.system.runTimeout(() => {
             mc.system.clearRun(run);
             mc.system.clearRun(count);
@@ -73,10 +81,15 @@ let handler = (
     } else if (command === "sethome") {
         if (!homeName) return sender.sendMessage(`§7pls type the homeName!!`);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         
         if (tools.useSymbol(homeName)) return sender.sendMessage("§chomeName can't use symbol!!")
 >>>>>>> ebcc790 (Upload folder)
+=======
+        
+        if (tools.useSymbol(homeName)) return sender.sendMessage("§chomeName can't use symbol!!")
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 
         if (home_db_sender.map(k => k?.name).includes(homeName))
             return sender.sendMessage(`§cyou already register this homeName!!`);
@@ -94,10 +107,14 @@ let handler = (
         };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         home_db.set(sender.name, [data, ...home_db_sender]); //register Home
 =======
         home_db.set(sender.id, [data, ...home_db_sender]); //register Home
 >>>>>>> ebcc790 (Upload folder)
+=======
+        home_db.set(sender.id, [data, ...home_db_sender]); //register Home
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
         sender.sendMessage(`§aSuccess create home with name §2'${homeName}'`);
         sender.playSound("random.pop");
     } else if (command === "delhome") {
@@ -110,10 +127,14 @@ let handler = (
 
         home_db.set(
 <<<<<<< HEAD
+<<<<<<< HEAD
             sender.name,
 =======
             sender.id,
 >>>>>>> ebcc790 (Upload folder)
+=======
+            sender.id,
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
             home_db_sender.filter(k => k.name !== homeName)
         ); //delete register home
         sender.sendMessage(`§asuccess delete home with name §2'${homeName}'`);

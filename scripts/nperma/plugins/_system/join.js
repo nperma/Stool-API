@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 let handler = ev => ev;
 
 handler.static = function (mc, { database, tools, config }) {
@@ -22,6 +23,8 @@ handler.static = function (mc, { database, tools, config }) {
                     "§2§l[ §a+ §l§2]§r §7»§r "
                 );
 =======
+=======
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 let dk = ev => ev;
 
 dk.static = (mc, { database, Database, config }) => {
@@ -53,13 +56,20 @@ dk.static = (mc, { database, Database, config }) => {
                     clanInvites: [],
                 });
             }
+<<<<<<< HEAD
 >>>>>>> ebcc790 (Upload folder)
+=======
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
         }
     });
 };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export default handler;
 =======
 export default dk;
 >>>>>>> ebcc790 (Upload folder)
+=======
+export default dk;
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)

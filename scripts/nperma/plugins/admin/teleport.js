@@ -8,14 +8,19 @@ let handler = function(ev,{sender,args,mc,database}) {
   
   sender.teleport(target.location, {dimension:mc.world.getDimension(target.dimension.id)})
 <<<<<<< HEAD
+<<<<<<< HEAD
   sender.sendMessage(`§aTeleport to ${args[0]}`)
 =======
   sender.sendMessage(`§7» §aTeleport to ${args[0]}`)
 >>>>>>> ebcc790 (Upload folder)
+=======
+  sender.sendMessage(`§7» §aTeleport to ${args[0]}`)
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 }
 
 handler.admin = true;
 handler.commands = ["tp","teleport"];
+<<<<<<< HEAD
 <<<<<<< HEAD
 handler.helps = ["teleport <playerName>"]
 =======
@@ -24,3 +29,9 @@ handler.category = "admin"
 
 export default handler
 >>>>>>> ebcc790 (Upload folder)
+=======
+handler.helps = ["teleport <playerName>"]
+handler.category = "admin"
+
+export default handler
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
