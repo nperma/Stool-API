@@ -64,42 +64,6 @@ function LoadSender([sender, ext]) {
         return tools.isMoving(this) ? true : false;
     };
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    // sender.data = function () {
-    //         return database["player_db"].get(this.name) ?? {};
-    //     };
-
-    // sender.isRegister = function () {
-    //         return database["player_db"].has(this.name);
-    //     };
-    //
-    //     sender.register = function () {
-    //         if (!this.isRegister()) {
-    //             database["player_db"].set(this.name, {
-    //                 name: this.name,
-    //                 id: this.id,
-    //                 dateRegister: Date.now(),
-    //                 balance:
-    //                     this.getBalance() ??
-    //                     this.setBalance(config.default_balance),
-    //                 home: database["home_db"].get(this.name) ?? [],
-    //                 death: 0,
-    //                 kill: 0,
-    //                 mute: { temporaryTime: null, reason: null },
-    //                 ban: { temporaryTime: null, reason: null },
-    //                 warn: {},
-    //                 land: database["land_db"].get(this.name) ?? []
-    //             });
-    //
-    //             return database["player_db"].get(this.name);
-    //         } else return database["player_db"].get(this.name);
-    //     };
-
-=======
->>>>>>> ebcc790 (Upload folder)
-=======
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
     sender.open = async function (uiform) {
         return await tools.forceOpen(this, uiform);
     };

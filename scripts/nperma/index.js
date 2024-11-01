@@ -24,15 +24,7 @@ import { JsonDatabase as Database } from "./extension/database.js";
 export { Database };
 import config from "../config.js";
 import LoadSender from "./extension/sender.js";
-<<<<<<< HEAD
-<<<<<<< HEAD
-import LoadServer from "./extension/server.js"
-=======
 import LoadServer from "./extension/server.js";
->>>>>>> ebcc790 (Upload folder)
-=======
-import LoadServer from "./extension/server.js";
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 import * as tools from "./extension/tools.js";
 
 /** @PREPARE_SPOT */
@@ -161,26 +153,7 @@ start().then(() => {
 
 mc.world.beforeEvents.chatSend.subscribe(ev => {
     let usePlugin = "";
-<<<<<<< HEAD
-<<<<<<< HEAD
-    const { sender: pppp, message } = ev;
-    let sender = LoadSender([
-        pppp,
-        {
-            config,
-            mc,
-            ui,
-            database:db_operator,
-            Database,
-            tools
-        }
-    ]);
-=======
     const { sender, message } = ev;
->>>>>>> ebcc790 (Upload folder)
-=======
-    const { sender, message } = ev;
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 
     let usePrefix = config.prefix.find(k => message.startsWith(k));
 
@@ -219,15 +192,7 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                     handler?.admin &&
                     typeof handler?.admin === "boolean" &&
                     handler?.admin === true &&
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    !sender.hasTag(config.admin_tag)
-=======
                     !(sender.hasTag(config.admin_tag)||config.owners.includes(sender.name))
->>>>>>> ebcc790 (Upload folder)
-=======
-                    !(sender.hasTag(config.admin_tag)||config.owners.includes(sender.name))
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
                 ) {
                     sender.sendMessage(config.message.isnotadmin);
                     break;
@@ -243,14 +208,7 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
     if (usePlugin) {
         mc.system.run(() => {
             const isAdmin = sender.hasTag(config.admin_tag),
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                 isOwner = config.owners.includes(sender.name),
->>>>>>> ebcc790 (Upload folder)
-=======
-                isOwner = config.owners.includes(sender.name),
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
                 isDev = SETDEV.has(sender.name),
                 args = message
                     ?.slice(usePrefix.length ?? 0)
@@ -271,14 +229,7 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                 tools,
                 prefix: usePrefix,
                 isAdmin,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                 isOwner,
->>>>>>> ebcc790 (Upload folder)
-=======
-                isOwner,
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
                 text,
                 isDev,
                 PLUGIN_REGISTER,
@@ -300,16 +251,8 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
 
         mc.world.sendMessage(
             config.default_format_chat
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                 ?.replace(/§[0-9a-zA-Z]/g, "")
                 ?.replace(/\n/g, "")
->>>>>>> ebcc790 (Upload folder)
-=======
-                ?.replace(/§[0-9a-zA-Z]/g, "")
-                ?.replace(/\n/g, "")
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
                 ?.replaceAll(
                     "@RANKS",
                     ranks
@@ -328,14 +271,7 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
         for (const plugin_after of Object.keys(attr_after))
             mc.system.run(() => {
                 const isAdmin = sender.hasTag(config.admin_tag),
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                     isOwner = config.owners.includes(sender.name),
->>>>>>> ebcc790 (Upload folder)
-=======
-                    isOwner = config.owners.includes(sender.name),
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
                     isDev = new Set(["NASRULGgindo", "NpermaDev"]).has(
                         sender.name
                     ),
@@ -356,14 +292,7 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                     prefix: usePrefix,
                     command,
                     isAdmin,
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                     isOwner,
->>>>>>> ebcc790 (Upload folder)
-=======
-                    isOwner,
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
                     tools,
                     config,
                     PLUGIN_REGISTER,
@@ -397,14 +326,7 @@ mc.system.runInterval(() => {
                     config,
                     tools,
                     isAdmin: player.hasTag(config.admin_tag),
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
                     isOwner: config.owners.includes(player.name),
->>>>>>> ebcc790 (Upload folder)
-=======
-                    isOwner: config.owners.includes(player.name),
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
                     isDev: SETDEV.has(player.name)
                 });
 });

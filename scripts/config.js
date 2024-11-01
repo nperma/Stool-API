@@ -15,14 +15,7 @@ const config = {
         teleport: true
     },
     default_title: "§l§2[§aSERVERTOOL§l§2]§r §7»§r ",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     owners: ["NpermaDev","NASRULGgindo"], //gamertag
->>>>>>> ebcc790 (Upload folder)
-=======
-    owners: ["NpermaDev","NASRULGgindo"], //gamertag
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
     default_balance: 2000,
 
     //rank configuration
@@ -31,14 +24,7 @@ const config = {
     prefix_rank: "§7§l[",
     suffix_rank: "§r§7§l]",
     default_format_chat: "@RANKS§r §g@@NAME §r§7» @MSG",
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     badwords: ["kontol", "memek", "nigga", "blacki", "whitei"],
->>>>>>> ebcc790 (Upload folder)
-=======
-    badwords: ["kontol", "memek", "nigga", "blacki", "whitei"],
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
     numeric_sysmbol: ["", "k", "M", "B", "T"],
     home: {
         countdown: 3, //3second
@@ -70,11 +56,6 @@ const config = {
         price_per_block: 100,
         sell_tax: 30 //percent
     },
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
     
     afk: {
       broadcast: true,
@@ -107,10 +88,6 @@ const config = {
             "alok"
         ]
     },
-<<<<<<< HEAD
->>>>>>> ebcc790 (Upload folder)
-=======
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 
     message: {
         isnotadmin: "you dont have permission to use this command!!",

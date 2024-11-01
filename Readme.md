@@ -5,16 +5,8 @@
 
 > **Note:** The API is still under development, and some features may undergo significant changes in future releases.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 > Pls actived Education edition & Beta-API
 
->>>>>>> ebcc790 (Upload folder)
-=======
-> Pls actived Education edition & Beta-API
-
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 ---
 
 ## Table of Contents
@@ -86,13 +78,6 @@ handler.helps = ["command_name <required_arg>"];
 handler.category = "category_name";
 handler.admin = false; // set to true if only admins can use
 handler.custom_prefix = ["!", "/"]; // optional custom prefixes
-<<<<<<< HEAD
-<<<<<<< HEAD
-handler.no_prefix = false // set to true if you want no prefix
-=======
->>>>>>> ebcc790 (Upload folder)
-=======
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 ```
 
 - **handler.commands**: An array of strings representing command names.
@@ -100,13 +85,6 @@ handler.no_prefix = false // set to true if you want no prefix
 - **handler.category**: Defines which category the command belongs to.
 - **handler.admin**: Boolean that determines if the command is restricted to admins.
 - **handler.custom_prefix**: An array of custom prefixes the command can use.
-<<<<<<< HEAD
-<<<<<<< HEAD
-- **handler.no_prefix**: Boolean to make the plugin use no prefix
-=======
->>>>>>> ebcc790 (Upload folder)
-=======
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 
 ---
 
@@ -115,15 +93,7 @@ handler.no_prefix = false // set to true if you want no prefix
 1. Clone the repository:
 
 ```bash
-<<<<<<< HEAD
-<<<<<<< HEAD
-git clone https://github.com/nperma/Stool-API.git
-=======
 git clone https://github.com/nperma/STOOL-API.git
->>>>>>> ebcc790 (Upload folder)
-=======
-git clone https://github.com/nperma/STOOL-API.git
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 ```
 
 2. Install dependencies:
@@ -219,12 +189,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 This version of the `README.md` provides additional detail on how the `commandHandler` structure works, ensuring a clear understanding of how to implement custom commands in STOOL-API.
-=======
-This version of the `README.md` provides additional detail on how the `commandHandler` structure works, ensuring a clear understanding of how to implement custom commands in STOOL-API.
->>>>>>> ebcc790 (Upload folder)
-=======
-This version of the `README.md` provides additional detail on how the `commandHandler` structure works, ensuring a clear understanding of how to implement custom commands in STOOL-API.
->>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
