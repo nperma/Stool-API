@@ -7,10 +7,14 @@ const HELP_CATEGORY = {
 let handler = function (
     ev,
 <<<<<<< HEAD
+<<<<<<< HEAD
     { config, sender, args, prefix, command, database, mc }
 =======
     { config, sender, args, prefix, command, database, mc, PLUGIN_REGISTER }
 >>>>>>> ebcc790 (Upload folder)
+=======
+    { config, sender, args, prefix, command, database, mc, PLUGIN_REGISTER }
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 ) {
     const cargs = args[0]?.toLowerCase();
     const db_ = database["plugins_db"];
@@ -21,12 +25,15 @@ let handler = function (
         mc.world.getAllPlayers().filter(k => k.hasTag(config.admin_tag))
             .length ?? 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     }\n§7--------------------------------------------------------------------------------\n§eCommand List:§r\n`;
 
     let suffix = "\n§r§7--------------------------------------------------------------------------------";
 
     if (!cargs) {
 =======
+=======
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
     }\n§7---------------------------------------------------------------------------\n§eCommand List:§r\n`;
 
     let suffix =
@@ -50,14 +57,20 @@ let handler = function (
             sender.sendMessage(
                 `§7category with name §c'${cargs}'§7 not found!!`
             );
+<<<<<<< HEAD
 >>>>>>> ebcc790 (Upload folder)
+=======
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
         const body_cat = Object.entries(HELP_CATEGORY)
             .map(([k, v]) => `§7| §e${prefix}${command} ${k} §g(${v})§r`)
             .join("\n");
 
         filler = filler + body_cat + suffix;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
     } else {
         const catg = PLUGIN_REGISTER.filter(
             k => k.split("-")[1].toLowerCase() === cargs.toLowerCase()
@@ -80,7 +93,10 @@ let handler = function (
             .join("\n");
 
         filler = filler + helps + suffix;
+<<<<<<< HEAD
 >>>>>>> ebcc790 (Upload folder)
+=======
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
     }
 
     sender.sendMessage(filler);
@@ -89,9 +105,13 @@ let handler = function (
 
 handler.commands = ["help", "list"];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 handler.helps = ["help", "help <category>"];
 >>>>>>> ebcc790 (Upload folder)
+=======
+handler.helps = ["help", "help <category>"];
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
 handler.category = "general";
 
 export default handler;

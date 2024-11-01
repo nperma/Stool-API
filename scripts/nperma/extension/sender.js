@@ -65,6 +65,7 @@ function LoadSender([sender, ext]) {
     };
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     // sender.data = function () {
     //         return database["player_db"].get(this.name) ?? {};
     //     };
@@ -97,6 +98,8 @@ function LoadSender([sender, ext]) {
 
 =======
 >>>>>>> ebcc790 (Upload folder)
+=======
+>>>>>>> f365f73 (Menambahkan perubahan dari folder saya)
     sender.open = async function (uiform) {
         return await tools.forceOpen(this, uiform);
     };
