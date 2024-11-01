@@ -64,6 +64,7 @@ function LoadSender([sender, ext]) {
         return tools.isMoving(this) ? true : false;
     };
 
+<<<<<<< HEAD
     // sender.data = function () {
     //         return database["player_db"].get(this.name) ?? {};
     //     };
@@ -94,6 +95,8 @@ function LoadSender([sender, ext]) {
     //         } else return database["player_db"].get(this.name);
     //     };
 
+=======
+>>>>>>> ebcc790 (Upload folder)
     sender.open = async function (uiform) {
         return await tools.forceOpen(this, uiform);
     };

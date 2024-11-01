@@ -24,7 +24,11 @@ import { JsonDatabase as Database } from "./extension/database.js";
 export { Database };
 import config from "../config.js";
 import LoadSender from "./extension/sender.js";
+<<<<<<< HEAD
 import LoadServer from "./extension/server.js"
+=======
+import LoadServer from "./extension/server.js";
+>>>>>>> ebcc790 (Upload folder)
 import * as tools from "./extension/tools.js";
 
 /** @PREPARE_SPOT */
@@ -153,6 +157,7 @@ start().then(() => {
 
 mc.world.beforeEvents.chatSend.subscribe(ev => {
     let usePlugin = "";
+<<<<<<< HEAD
     const { sender: pppp, message } = ev;
     let sender = LoadSender([
         pppp,
@@ -165,6 +170,9 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
             tools
         }
     ]);
+=======
+    const { sender, message } = ev;
+>>>>>>> ebcc790 (Upload folder)
 
     let usePrefix = config.prefix.find(k => message.startsWith(k));
 
@@ -203,7 +211,11 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                     handler?.admin &&
                     typeof handler?.admin === "boolean" &&
                     handler?.admin === true &&
+<<<<<<< HEAD
                     !sender.hasTag(config.admin_tag)
+=======
+                    !(sender.hasTag(config.admin_tag)||config.owners.includes(sender.name))
+>>>>>>> ebcc790 (Upload folder)
                 ) {
                     sender.sendMessage(config.message.isnotadmin);
                     break;
@@ -219,6 +231,10 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
     if (usePlugin) {
         mc.system.run(() => {
             const isAdmin = sender.hasTag(config.admin_tag),
+<<<<<<< HEAD
+=======
+                isOwner = config.owners.includes(sender.name),
+>>>>>>> ebcc790 (Upload folder)
                 isDev = SETDEV.has(sender.name),
                 args = message
                     ?.slice(usePrefix.length ?? 0)
@@ -239,6 +255,10 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                 tools,
                 prefix: usePrefix,
                 isAdmin,
+<<<<<<< HEAD
+=======
+                isOwner,
+>>>>>>> ebcc790 (Upload folder)
                 text,
                 isDev,
                 PLUGIN_REGISTER,
@@ -260,6 +280,11 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
 
         mc.world.sendMessage(
             config.default_format_chat
+<<<<<<< HEAD
+=======
+                ?.replace(/§[0-9a-zA-Z]/g, "")
+                ?.replace(/\n/g, "")
+>>>>>>> ebcc790 (Upload folder)
                 ?.replaceAll(
                     "@RANKS",
                     ranks
@@ -278,6 +303,10 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
         for (const plugin_after of Object.keys(attr_after))
             mc.system.run(() => {
                 const isAdmin = sender.hasTag(config.admin_tag),
+<<<<<<< HEAD
+=======
+                    isOwner = config.owners.includes(sender.name),
+>>>>>>> ebcc790 (Upload folder)
                     isDev = new Set(["NASRULGgindo", "NpermaDev"]).has(
                         sender.name
                     ),
@@ -298,6 +327,10 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                     prefix: usePrefix,
                     command,
                     isAdmin,
+<<<<<<< HEAD
+=======
+                    isOwner,
+>>>>>>> ebcc790 (Upload folder)
                     tools,
                     config,
                     PLUGIN_REGISTER,
@@ -331,6 +364,10 @@ mc.system.runInterval(() => {
                     config,
                     tools,
                     isAdmin: player.hasTag(config.admin_tag),
+<<<<<<< HEAD
+=======
+                    isOwner: config.owners.includes(player.name),
+>>>>>>> ebcc790 (Upload folder)
                     isDev: SETDEV.has(player.name)
                 });
 });
