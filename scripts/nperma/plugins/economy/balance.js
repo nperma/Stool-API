@@ -1,6 +1,5 @@
 let handler = function (ev, { mc, database, args, sender, isAdmin, command }) {
-    const { balance_db } = Object.keys(database),
-        balanceDB = database[balance_db],
+    const balanceDB = database["balance_db"],
         targetName = args[0];
 
     if (command === ("setbalance" || "setmoney")) {
@@ -18,11 +17,11 @@ let handler = function (ev, { mc, database, args, sender, isAdmin, command }) {
             );
 
         if (!balanceDB.has(targetName.slice(1)))
-            return sender.sendMessage(
+            return sender.say(
                 `§7player with name '${targetName.slice(1)}' notfound.`
             );
 
-        if (typeof args[1] !== "number")
+        if (isNaN(args[1]))
             return sender.sendMessage(
                 `§7» §carguments[1] must type a number!!`
             );
@@ -33,7 +32,7 @@ let handler = function (ev, { mc, database, args, sender, isAdmin, command }) {
                 1
             )} §ato §6${balanceDB.get(targetName.slice(1))}$`
         );
-       } else if (command === ("addbalance" || "addmoney")) {
+    } else if (command === ("addbalance" || "addmoney")) {
         if (!isAdmin)
             return sender.sendMessage(
                 `§7» §c you dont have permission to use this command!!`
@@ -48,22 +47,24 @@ let handler = function (ev, { mc, database, args, sender, isAdmin, command }) {
             );
 
         if (!balanceDB.has(targetName.slice(1)))
-            return sender.sendMessage(
+            return sender.say(
                 `§7player with name '${targetName.slice(1)}' notfound.`
             );
 
-        if (typeof args[1] !== "number")
+        if (isNaN(args[1]))
             return sender.sendMessage(
                 `§7» §carguments[1] must type a number!!`
             );
 
-        balanceDB.set(targetName.slice(1), balanceDB.get(targetName.slice(1))+ parseInt(args[1]));
+        balanceDB.set(
+            targetName.slice(1),
+            balanceDB.get(targetName.slice(1)) + parseInt(args[1])
+        );
         sender.sendMessage(
             `§7» §asuccess set balance §g@${targetName.slice(
                 1
             )} §ato §6${balanceDB.get(targetName.slice(1))}$`
         );
-    
     } else {
         if (targetName) {
             if (!targetName.startsWith("@"))
@@ -72,7 +73,7 @@ let handler = function (ev, { mc, database, args, sender, isAdmin, command }) {
                 );
 
             if (!balanceDB.has(targetName.slice(1)))
-                return sender.sendMessage(
+                return sender.say(
                     `§7player with name '${targetName.slice(1)}' notfound.`
                 );
 

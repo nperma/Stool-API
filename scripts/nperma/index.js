@@ -142,6 +142,7 @@ start().then(() => {
                 attr,
                 tools,
                 server,
+                config,
                 attr_after,
                 attr_interval,
                 attr_static,
@@ -192,9 +193,14 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                     handler?.admin &&
                     typeof handler?.admin === "boolean" &&
                     handler?.admin === true &&
-                    !(sender.hasTag(config.admin_tag)||config.owners.includes(sender.name))
+                    !(
+                        sender.hasTag(config.admin_tag) ||
+                        config.owners.includes(sender.name)
+                    )
                 ) {
                     sender.sendMessage(config.message.isnotadmin);
+                    usePlugin = plugin;
+                    usePrefix = usePrefix;
                     break;
                 }
                 usePlugin = plugin;
@@ -216,6 +222,8 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                     .split(" "),
                 command = args.shift().toLowerCase();
             let text = args.slice(0).join(" ");
+            
+            if (attr[usePlugin]?.admin&&!isAdmin)return;
 
             attr[usePlugin].call(this, ev, {
                 sender,

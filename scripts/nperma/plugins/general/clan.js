@@ -43,19 +43,23 @@ let clan = function isClan888(
         return sender.say(
             `§cUnknown subcommand. Available commands: ${Object.entries(
                 structure
-            ).map(
-                ([key, value]) =>
-                    `§7• §e${prefix}${command} §g${key} §7<${value?.toLowerCase()}>`
-            )}`
+            )
+                .map(
+                    ([key, value]) =>
+                        `§7• §e${prefix}${command} §g${key} §7<${value?.toLowerCase()}>`
+                )
+                .join("\n")}`
         );
 
     switch (ss1) {
         case "help":
             sender.say(
-                `§7Available commands:\n${Object.entries(structure).map(
-                    ([key, value]) =>
-                        `§7• §e${prefix}${command} §g${key} §7<${value?.toLowerCase()}>`
-                )}`
+                `§7Available commands:\n${Object.entries(structure)
+                    .map(
+                        ([key, value]) =>
+                            `§7• §e${prefix}${command} §g${key} §7<${value?.toLowerCase()}>`
+                    )
+                    .join("\n")}`
             );
             break;
 
@@ -147,13 +151,22 @@ let clan = function isClan888(
 
                 if (!ClanDB.has(ss2))
                     return sender.say(
-                        `§cclan with name §4'${ss2}'§c not defined!!`
+                        `§c${command} with name §4'${ss2}'§c not defined!!`
                     );
 
                 ClanDB.set(ss2, {
                     ...ClanDB.get(ss2),
                     invitesMail: ClanDB.get(ss2).invitesMail.push(sender.name)
                 });
+
+                if (player_db.get(sender.name).clanInvites.includes(ss2)) {
+                    ClanDB.set(ss2, {
+                        ...ClanDB.get(ss2),
+                        members: [...ClanDB.get(ss2).members, sender.name]
+                    });
+                    
+                    sender.say(`§ajoined ${command} with name §2${ss2}`)
+                }
             }
             break;
 
