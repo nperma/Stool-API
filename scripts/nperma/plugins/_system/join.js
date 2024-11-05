@@ -19,14 +19,14 @@ dk.static = (mc, { database, Database, config }) => {
                     kill: 0,
                     death: 0,
                     mute: [],
-                    ban: { cause: null, temporary: null },
+                    ban: { cause: null, temporary: null,by:null },
                     kick: [],
                     warn: [],
                     afkTime: 0,
                     isAfk: false,
-                    admin: player.hasTag(config.admin_tag)?true:false,
+                    admin: player.hasTag(config.admin_tag) ? true : false,
                     disbandAdmin: false,
-                    clanInvites: [],
+                    clanInvites: []
                 });
             }
         }

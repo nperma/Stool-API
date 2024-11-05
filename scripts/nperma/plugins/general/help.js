@@ -11,9 +11,9 @@ let handler = function (
     const cargs = args[0]?.toLowerCase();
     const db_ = database["plugins_db"];
 
-    let filler = `§euse command §g'${prefix}${command}'§e, feature length: §a${
+    let filler = `§euse command §g'${prefix}${command}'§e, plugins: §a${
         Array.from(db_.keys()).length
-    }\n§eadmin length: §c${
+    }\n§eadmins: §c${
         mc.world.getAllPlayers().filter(k => k.hasTag(config.admin_tag))
             .length ?? 0
     }\n§7---------------------------------------------------------------------------\n§eCommand List:§r\n`;

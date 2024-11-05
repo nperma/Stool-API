@@ -165,9 +165,6 @@ sukma.removeInvited = function (landId, invitedPlayer) {
 
 sukma.manageLandUI = function (landId, player, [forceopen, ui]) {
     const land = sukma.findLand(landId);
-    if (!land) return { success: false, message: "Land not found." };
-    if (land.owner !== player.id)
-        return { success: false, message: "You don't own this land." };
 
     const uip = new ui.ModalFormData().title(`§lMANAGE §2[ §a${landId}§2 ]`);
 
@@ -179,16 +176,20 @@ sukma.manageLandUI = function (landId, player, [forceopen, ui]) {
     forceopen(player, uip).then(r => {
         if (r.canceled) return player.sendMessage("§7» cancel");
 
-        const selectedOption = Object.keys(land.protect)[r.formValues - 1];
+        const newProtect = Object.keys(land.protect).reduce((acc, key, index) => {
+            acc[key] = r.formValues[index];
+            return acc;
+        }, {});
+
         db_land.set(landId, {
             ...land,
-            protect: {
-                ...land.protect,
-                [selectedOption]: !land.protect[selectedOption]
-            }
+            protect: newProtect
         });
+
+        player.sendMessage("§a» Land protection updated successfully.");
     });
 };
+
 
 sukma.calcSize = function ([pos1, pos2]) {
     const width = Math.abs(pos2.x - pos1.x) + 1,
@@ -290,8 +291,12 @@ let handler = function (
                 ? sukma.findLand(landId)
                 : sukma.inLand(sender).land;
 
-        if (!findLand || findLand.owner !== sender.id)
-            return sender.say(`§cyou do not own land with ID: §4${landId}`);
+        if (!findLand) return sender.say(`§cland is not defined.`);
+
+        if (findLand.owner !== sender.id)
+            return sender.say(
+                `§cyou do not own land with ID: §4${findLand.id}`
+            );
 
         const land = findLand;
         const sellPrice = land.size * config.land.price_per_block;
@@ -328,14 +333,23 @@ let handler = function (
                 .join("\n")}`
         );
     } else if (subcommand === "manage" || subcommand === "manageui") {
-        const landId = sscomand;
+        const landId = sscomand || "here",
+            findLand = sscomand
+                ? sukma.findLand(landId)
+                : sukma.inLand(sender).land;
 
-        if (!landId) return sender.say("§7ply type landid!!");
+        if (!findLand) return sender.say(`§cland is not defined.`);
 
-        const land = sukma.manageLandUI(landId, sender, [tools.forceopen, ui]);
-        if (land.success) return sender.say("§7close chat to open manageui");
-        else if (!land.success)
-            return sender.say(`§cFailed to open manageui: ${land.message}`);
+        if (findLand.owner !== sender.id)
+            return sender.say(
+                `§cyou do not own land with ID: §4${findLand.id}`
+            );
+
+        const land = sukma.manageLandUI(findLand.id, sender, [
+            tools.forceOpen,
+            ui
+        ]);
+        sender.say("§7close chat to open manageui");
     } else {
         sender.say(`§cUnknown subcommand. Type ${prefix}land help for usage.`);
     }

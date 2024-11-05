@@ -1,11 +1,11 @@
 <h1 align="center">STOOL-API</h1>
 <p align="center">An API for Minecraft Bedrock Edition ScriptAPI development.</p>
 
-**STOOL-API** is an advanced API designed for Minecraft Bedrock Edition ScriptAPI development. This API focuses on creating powerful server tools and enhancing player interactions, providing a customizable and developer-friendly environment.
+**STOOL-API** is a feature-rich API for Minecraft Bedrock Edition ScriptAPI development, designed to facilitate server tool creation and improve player interaction through customizable and developer-friendly tools.
 
-> **Note:** The API is still under development, and some features may undergo significant changes in future releases.
+> **Note:** This API is currently in development, so features may change in future versions.
 
-> Pls actived Education edition & Beta-API
+> **Requirement:** Make sure Education Edition & Beta-API are enabled.
 
 ---
 
@@ -19,8 +19,8 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Examples](#examples)
-  - [Custom Prefix](#custom-prefix-example)
-  - [Admin Command](#admin-command-example)
+  - [Custom Prefix Example](#custom-prefix-example)
+  - [Admin Command Example](#admin-command-example)
 - [Contributing](#contributing)
 - [License](#license)
 - [Creator](#creator)
@@ -29,62 +29,62 @@
 
 ## Features
 
-- Easy-to-configure setup using JavaScript files.
-- Flexible command system with custom prefixes and role-based access.
-- Built-in support for teleportation, warps, and home systems.
-- Detailed logging and broadcast features.
-- Player management: handle roles, balances, and player-specific data.
-- Plugin-based architecture for ease of development.
+- Easy configuration through JavaScript files.
+- Customizable command system with support for prefixes and role-based access.
+- Built-in teleportation, warps, and home systems.
+- Robust logging and broadcast options.
+- Player management capabilities, including role assignments, balances, and custom data storage.
+- Plugin-based architecture for modular development.
 
 ---
 
 ## Configuration
 
-All configurations are managed through the `config.js` file. This allows you to control various aspects of the server tools, such as command prefixes, admin tags, logging options, and more.
+The API is configured via `config.js`, which manages command prefixes, admin tags, logging, and other settings.
 
-- **Path configuration**: [config.js](https://github.com/nperma/Stool-API/blob/main/scripts/config.js)
+- **Config Path**: [config.js](https://github.com/nperma/Stool-API/blob/main/scripts/config.js)
 
 ---
 
 ## Plugin System
 
-STOOL-API supports a plugin system that allows developers to easily add or remove functionality without modifying the core system. Plugins are registered in the `register.js` file, making it easy to organize and extend the API.
+STOOL-API supports a modular plugin system. You can easily add or remove plugins without altering core files. Plugins are registered in `register.js` for easy management.
 
-- **Path PLUGIN REGISTER**: [register.js](https://github.com/nperma/Stool-API/blob/main/scripts/nperma/register.js)
+- **Plugin Registration Path**: [register.js](https://github.com/nperma/Stool-API/blob/main/scripts/nperma/register.js)
 
 ---
 
 ## Command Handlers
 
-The command handler system is at the heart of STOOL-API. Handlers allow developers to define commands, provide help messages, and assign categories for easy grouping.
+The command handler system lets you define and organize commands efficiently. You can create commands with custom help messages, categories, and admin-only restrictions.
 
 ### Command Handler Structure
 
-Each command handler is a function that processes events and executes the desired logic based on the input provided by the player. Handlers come with configurable options such as the command names, help messages, category, admin privileges, and custom prefixes.
+Each command handler is a function that defines command logic, such as what actions to execute based on player input. Handlers also allow for custom prefixes, role-based restrictions, and usage help messages.
 
-**Structure Example:**
+**Handler Structure Example:**
 
 ```javascript
 /**
- * HANDLER STRUCTURE
+ * Command handler structure example.
  * @type {Command<function>}
  */
 let handler = function(event, context) {
-  // Your command logic here
+  // Command logic goes here
 };
 
 handler.commands = ["command_name"];
-handler.helps = ["command_name <required_arg>"];
+handler.helps = ["command_name <arg>"];
 handler.category = "category_name";
-handler.admin = false; // set to true if only admins can use
-handler.custom_prefix = ["!", "/"]; // optional custom prefixes
+handler.admin = false; // Set to true for admin-only commands
+handler.custom_prefix = ["!", "/"]; // Optional custom prefixes
 ```
 
-- **handler.commands**: An array of strings representing command names.
-- **handler.helps**: An array of strings that describe how to use the command.
-- **handler.category**: Defines which category the command belongs to.
-- **handler.admin**: Boolean that determines if the command is restricted to admins.
-- **handler.custom_prefix**: An array of custom prefixes the command can use.
+- **handler.commands**: An array of command names.
+- **handler.helps**: Usage examples for the command.
+- **handler.category**: The category under which the command falls.
+- **handler.admin**: Boolean to restrict the command to admins.
+- **handler.custom_prefix**: Array of prefixes specific to the command.
 
 ---
 
@@ -92,40 +92,39 @@ handler.custom_prefix = ["!", "/"]; // optional custom prefixes
 
 1. Clone the repository:
 
-```bash
-git clone https://github.com/nperma/STOOL-API.git
-```
+   ```bash
+   git clone https://github.com/nperma/STOOL-API.git
+   ```
 
 2. Install dependencies:
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
-3. Configure the `config.js` file as per your requirements.
+3. Update the `config.js` file as needed.
 
-4. Register your plugins in the `register.js` file.
+4. Register plugins in `register.js`.
 
 ---
 
 ## Usage
 
-Once installed, STOOL-API will automatically load all registered plugins. You can define commands, events, and other functionalities in the corresponding handler files.
+STOOL-API automatically loads registered plugins. To create new plugins:
 
-To create a new plugin:
-
-1. Define a new command handler.
-2. Add the handler to the `register.js` file.
-3. Reload(`/reload`) the server to apply the changes.
+1. Define a command handler.
+2. Register it in `register.js`.
+3. Reload the server (`/reload`) to apply changes.
 
 ---
 
 ## Examples
-- some examples Plugins: [plugins](https://github.com/nperma/Stool-API/tree/main/scripts/nperma/plugins)
+
+Find example plugins here: [plugins](https://github.com/nperma/Stool-API/tree/main/scripts/nperma/plugins)
 
 ### Custom Prefix Example
 
-You can define custom prefixes for commands, allowing them to be executed with multiple prefixes.
+Define custom prefixes to allow commands to be triggered with multiple options.
 
 ```javascript
 let handler = function(ev, { text, mc }) {
@@ -146,7 +145,7 @@ export default handler;
 
 ### Admin Command Example
 
-Restrict commands to certain roles or tags by setting `handler.admin = true`. This ensures that only players with the `admin_tag` can use the command.
+Restrict commands to admin users by setting `handler.admin = true`.
 
 ```javascript
 let handler = function(ev, { sender, tools, text }) {
@@ -165,15 +164,15 @@ export default handler;
 
 ## Contributing
 
-We welcome contributions to STOOL-API! If you'd like to add features or fix issues, feel free to create a pull request or open an issue on our [GitHub repository](https://github.com/nperma/STOOL-API).
+We welcome contributions to STOOL-API! Feel free to submit a pull request or open an issue in our [GitHub repository](https://github.com/nperma/STOOL-API).
 
-### Guidelines for Contribution
+### Contribution Guidelines
 
 1. Fork the repository.
-2. Create a new feature branch (`git checkout -b feature/my-feature`).
+2. Create a feature branch (`git checkout -b feature/my-feature`).
 3. Commit your changes (`git commit -am 'Add new feature'`).
-4. Push to the branch (`git push origin feature/my-feature`).
-5. Create a new pull request.
+4. Push to your branch (`git push origin feature/my-feature`).
+5. Create a pull request.
 
 ---
 
@@ -187,6 +186,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 - [Nperma](https://github.com/nperma)
 
----
+--- 
 
-This version of the `README.md` provides additional detail on how the `commandHandler` structure works, ensuring a clear understanding of how to implement custom commands in STOOL-API.
+This updated `README.md` provides clearer instructions and example handler code for implementing custom commands in STOOL-API.

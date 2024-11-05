@@ -48,8 +48,8 @@ frik.static = (mc, { tools, database, config }) => {
         }
 
         const recipientBalance = database["balance_db"].get(recipientName);
-        database["balance_db"].set(recipientName, recipientBalance + amount);
         this.setBalance(myBalance - amount);
+        database["balance_db"].set(recipientName, recipientBalance + amount);
 
         this.say(`§aYou paid §g@${recipientName} §6${amount}$`);
         recipient.sendMessage(`§7» §aYou received §6${amount}$ from §g@${this.name}`);
