@@ -29,7 +29,7 @@ let handler = (ev, { sender, args, database, tools, config, command}) => {
         .getAllPlayers()
         .find(p => p.name === playerName);
 
-    if (!findTarget && !player_db.has(playerName))
+    if (!findTarget || !player_db.has(playerName))
         return sender.sendMessage(
             `§7» §cPlayer named §4'${playerName}'§c was not found.`
         );
@@ -43,7 +43,7 @@ let handler = (ev, { sender, args, database, tools, config, command}) => {
             );
 
         const duration = option[args[1]];
-        const cause = args[2];
+        const cause = args.slice(2).join(" ");
 
         if (!cause)
             return sender.say("§7Please specify a reason for banning this player.");

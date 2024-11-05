@@ -1,5 +1,5 @@
 const config = {
-    /** 
+    /**
      * Configuration version - DO NOT CHANGE THIS!
      * @type {string}
      */
@@ -66,6 +66,12 @@ const config = {
      * @type {string[]}
      */
     antibans: ["NpermaDev"],
+    
+    /**
+     * List of gamertags exempt from being kick
+     * @type {string[]}
+     **/
+     antikicks: ["NpermaDev"],
 
     /**
      * Starting balance for new players
@@ -91,19 +97,19 @@ const config = {
      * Prefix symbol for displaying rank in chat
      * @type {string}
      */
-    prefix_rank: "§7§l[",
+    prefix_rank: "§7§l[ ",
 
     /**
      * Suffix symbol for displaying rank in chat
      * @type {string}
      */
-    suffix_rank: "§r§7§l]",
+    suffix_rank: " §r§7§l]",
 
     /**
      * Chat format template, where @RANKS is the rank, @NAME is the username, and @MSG is the message
      * @type {string}
      */
-    default_format_chat: "@RANKS§r §g@@NAME §r§7» @MSG",
+    default_format_chat: "@RANKS§r §a@NAME §r§7» §r@MSG",
 
     /**
      * List of words to be filtered as inappropriate language
@@ -246,8 +252,17 @@ const config = {
          * @type {string[]}
          */
         badSletter: [
-            "pdi", "kontol", "bokep", "memek", "anjing", 
-            "nanda", "adit", "nperma", "lol", "nigga", "alok"
+            "pdi",
+            "kontol",
+            "bokep",
+            "memek",
+            "anjing",
+            "nanda",
+            "adit",
+            "nperma",
+            "lol",
+            "nigga",
+            "alok"
         ]
     },
 
