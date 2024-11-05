@@ -1,5 +1,6 @@
 // plugin KICK
 // under development
+// idk
 
 let handler = (ev,{sender,args,database}) => {};
 handler.static = (mc,{database}) => {};
