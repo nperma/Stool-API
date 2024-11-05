@@ -11,6 +11,7 @@ export default [
     "afk-general",
     "tps-general",
     "about-general",
+    "rtp-general", //unfinished
     "home-general",
     "sb-general",
     "clearchat-general",
@@ -29,7 +30,7 @@ export default [
     "msb-admin",
     "mute-admin",
     "ban-admin",
-    //"kick-admin", plugin terpisah
+    "kick-admin",
     "teleport-admin",
     /** @economy */
     "balance-economy",

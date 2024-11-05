@@ -13,7 +13,7 @@ let handler = (ev, { sender, args, tools, mc, database, command }) => {
         .getAllPlayers()
         .find(p => p.name === playerName);
 
-    if (!findTarget && !player_db.has(playerName))
+    if (!findTarget || !player_db.has(playerName))
         return sender.sendMessage(`§7» §cPlayer with name §4'${playerName}'§c not found!`);
 
     const playerMuteData = player_db.get(playerName)?.mute || [];

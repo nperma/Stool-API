@@ -1,0 +1,203 @@
+const config = {
+    //betterRTP addon
+    /** @note dont change this.. */
+    author: "nperma",
+    discordlink: "https://discord.com/invite/8ferx5wyAB",
+
+    /** @editArea */
+    watchdog: false,
+    command: ["rtp", "randomteleport"],
+    dimension: "overworld", //only support overworld
+    center: [0, 0], // [x,z]
+    randomlyX: 1000,
+    randomlyZ: 1000,
+    translate: {
+        underPending:
+            "§cYou are still in queue, wait until the RTP is finished",
+        rtpCancel: "§7RTP cancel",
+        rtpPending: "Teleport...",
+        rtpSuccess: {
+            title: "Teleported",
+            content: "§7{x} {y} {z}"
+        }
+    },
+    msgOption: "title" /** @option [message, title] */,
+    autoTeleportWhenFirstJoin: false
+};
+
+let handler = (ev,{mc}) => {
+    if (
+        ev.sender.hasTag(
+            `${ev.sender.getTags().find(k => k.startsWith("loadchunck`"))}`
+        )
+    )
+        return ev.sender.sendMessage(config.translate.underPending);
+    const location = {
+        x:
+            Math.floor(
+                Math.random() * (config.randomlyX + config.randomlyX + 1)
+            ) - config.randomlyX,
+        y: 320,
+        z:
+            Math.floor(
+                Math.random() * (config.randomlyZ + config.randomlyZ + 1)
+            ) - config.randomlyZ
+    };
+    ev.sender.addTag(
+        `oldchunck\`${JSON.stringify({
+            ...ev.sender.location,
+            dim: ev.sender.dimension.id
+        })}`
+    );
+    ev.sender.teleport(
+        { x: config.center[0], y: 320, z: config.center[1] },
+        { dimension: mc.world.getDimension(config.dimension) }
+    );
+    ev.sender.teleport(
+        { ...location },
+        { dimension: mc.world.getDimension(config.dimension) }
+    );
+    ev.sender.addTag(`loadchunck\`${JSON.stringify(location)}`);
+    if (config.msgOption === "title")
+        ev.sender.onScreenDisplay.setTitle(config.translate.rtpPending);
+    else ev.sender.sendMessage(config.translate.rtpPending);
+};
+
+handler.static = mc => {
+    const { world, system } = mc;
+
+    world.afterEvents.playerJoin.subscribe(({ playerName }) => {
+        const player = world.getPlayers({ name: playerName })[0];
+
+        if (!config.autoTeleportWhenFirstJoin) return;
+
+        system.run(() => {
+            const location = {
+                x:
+                    Math.floor(
+                        Math.random() *
+                            (config.randomlyX + config.randomlyX + 1)
+                    ) - config.randomlyX,
+                y: 320,
+                z:
+                    Math.floor(
+                        Math.random() *
+                            (config.randomlyZ + config.randomlyZ + 1)
+                    ) - config.randomlyZ
+            };
+            player.addTag(
+                `oldchunck\`${JSON.stringify({
+                    ...player.location,
+                    dim: player.dimension.id
+                })}`
+            );
+            player.teleport(
+                { x: config.center[0], y: 320, z: config.center[1] },
+                { dimension: world.getDimension(config.dimension) }
+            );
+            player.teleport(
+                { ...location },
+                { dimension: world.getDimension(config.dimension) }
+            );
+
+            player.addTag(`loadchunck\`${JSON.stringify(location)}`);
+            if (config.msgOption === "title")
+                player.onScreenDisplay.setTitle(config.translate.rtpPending);
+            else player.sendMessage(config.translate.rtpPending);
+        });
+    });
+
+    world.beforeEvents.playerLeave.subscribe(({ player }) => {
+        if (
+            !player.hasTag(
+                `${player.getTags().find(k => k.startsWith("loadchunck`"))}`
+            )
+        )
+            return;
+
+        system.run(() => {
+            player.removeTag(
+                player.getTags().find(k => k.startsWith("loadchunck`"))
+            );
+            const { x, y, z, dim } = JSON.parse(
+                player
+                    .getTags()
+                    .find(k => k.startsWith("oldchunck`"))
+                    .split("`")[1]
+            );
+            player.teleport(
+                { x, y, z },
+                { dimension: world.getDimension(dim) }
+            );
+            player.removeTag(
+                player.getTags().find(k => k.startsWith("oldchunck`"))
+            );
+            player.addTag("unload");
+        });
+    });
+
+    world.afterEvents.playerSpawn.subscribe(
+        ({ player, initialSpawn: spawn }) => {
+            if (spawn && player.hasTag("unload")) {
+                player.sendMessage(config.translate.rtpCancel);
+                system.run(() => player.removeTag("unload"));
+            }
+        }
+    );
+};
+handler.interval = ({ player, mc }) => {
+    try {
+        const data = player
+            .getTags()
+            .find(tag => tag.startsWith("loadchunck`"));
+        const oldData = player.getTags().find(k => k.startsWith("oldchunck`"));
+        if (!data) return;
+
+        const { x, y, z } = JSON.parse(data.split("`")[1]);
+        let i = 320;
+        let block = player.dimension.getBlock({ x, y: i, z });
+
+        while (i >= -64 && (block.isAir || i === 320)) {
+            i--;
+            block = player.dimension.getBlock({ x, y: i, z });
+        }
+
+        if (i >= -64) {
+            player.teleport(
+                {
+                    x: block.x + 0.5,
+                    y: Math.round(block.y + 0.5),
+                    z: block.z + 0.5
+                },
+                { dimension: mc.world.getDimension("overworld") }
+            );
+            player.removeTag(data);
+            player.removeTag(oldData);
+            if (config.msgOption === "title") {
+                player.onScreenDisplay.setTitle(
+                    config.translate.rtpSuccess.title
+                );
+                player.onScreenDisplay.updateSubtitle(
+                    config.translate.rtpSuccess.content
+                        ?.replace(/{x}/g, Math.round(block.x + 0.5))
+                        ?.replace(/{y}/g, Math.round(block.y + 0.5))
+                        ?.replace(/{z}/g, Math.round(block.z + 0.5))
+                );
+            } else {
+                player.sendMessage(
+                    config.translate.rtpSuccess.title +
+                        "\n" +
+                        config.translate.rtpSuccess.content
+                            ?.replace(/{x}/g, Math.round(block.x + 0.5))
+                            ?.replace(/{y}/g, Math.round(block.y + 0.5))
+                            ?.replace(/{z}/g, Math.round(block.z + 0.5))
+                );
+            }
+        }
+    } catch {}
+};
+
+handler.commands = handler.helps = config.command;
+handler.category = "general";
+
+export default handler;
