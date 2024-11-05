@@ -11,7 +11,7 @@ export default [
     "afk-general",
     "tps-general",
     "about-general",
-    "rtp-general", //unfinished
+    //"rtp-general", //unfinished
     "home-general",
     "sb-general",
     "clearchat-general",
