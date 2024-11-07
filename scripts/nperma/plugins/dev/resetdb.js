@@ -1,4 +1,4 @@
-let handler = function (ev, { isDev, args, database }) {
+let handler = function (ev, { sender,isDev, args, database }) {
     if (!isDev) return sender.sendMessage(`You are not a developer`);
 
     if (args[0] === "all")

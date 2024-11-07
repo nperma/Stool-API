@@ -107,16 +107,16 @@ async function start() {
                 JSON.stringify(db_operator["plugins_db"].get(plugin)) ===
                     JSON.stringify(MAP_PL.get(plugin))
             ) {
-                console.warn(`Loaded Plugin: ${plugin}`);
+                console.log(`Loaded Plugin: ${plugin}`);
                 continue;
             } else if (!db_operator["plugins_db"].has(plugin)) {
-                console.warn(`Added and load Plugin: ${plugin}`);
+                console.log(`Added and load Plugin: ${plugin}`);
             } else if (
                 db_operator["plugins_db"].has(plugin) &&
                 JSON.stringify(db_operator["plugins_db"].get(plugin)) !==
                     JSON.stringify(MAP_PL.get(plugin))
             ) {
-                console.warn(`Reload plugin: ${plugin}`);
+                console.log(`Reload plugin: ${plugin}`);
             }
 
             db_operator["plugins_db"].set(plugin, MAP_PL.get(plugin));
@@ -198,7 +198,7 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                         config.owners.includes(sender.name)
                     )
                 ) {
-                    sender.sendMessage(config.message.isnotadmin);
+                    sender.sendMessage("§7» §c" + config.message.isnotadmin);
                     usePlugin = plugin;
                     usePrefix = usePrefix;
                     break;
@@ -222,8 +222,8 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
                     .split(" "),
                 command = args.shift().toLowerCase();
             let text = args.slice(0).join(" ");
-            
-            if (attr[usePlugin]?.admin&&!isAdmin)return;
+
+            if (attr[usePlugin]?.admin && !isAdmin) return;
 
             attr[usePlugin].call(this, ev, {
                 sender,
@@ -249,31 +249,7 @@ mc.world.beforeEvents.chatSend.subscribe(ev => {
             });
         });
     } else {
-        const ranks = [
-                config.default_rank,
-                ...sender
-                    .getTags()
-                    .filter(k => k.startsWith(config.default_prefix_rank))
-            ],
-            rank = ranks[ranks - 1]; //get current rank
-
-        mc.world.sendMessage(
-            config.default_format_chat
-                ?.replace(/§[0-9a-zA-Z]/g, "")
-                ?.replace(/\n/g, "")
-                ?.replaceAll(
-                    "@RANKS",
-                    ranks
-                        .sort((a, b) => b - a)
-                        .map(
-                            r =>
-                                `${config.prefix_rank}${r}${config.suffix_rank}`
-                        )
-                        .join(" ")
-                )
-                ?.replaceAll("@NAME", sender.name)
-                ?.replaceAll("@MSG", message)
-        );
+        //empty and migrate to chat-_system plugin
     }
     if (Object.keys(attr_after).length > 0) {
         for (const plugin_after of Object.keys(attr_after))
