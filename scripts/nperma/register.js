@@ -6,12 +6,13 @@ export default [
     "player-_system",
     "ui-_system",
     "detect_admin-_system",
+    "chat-_system",
     /** @general */
     "help-general",
     "afk-general",
     "tps-general",
     "about-general",
-    //"rtp-general", //unfinished
+    "rtp-general",
     "home-general",
     "sb-general",
     "clearchat-general",
@@ -19,6 +20,7 @@ export default [
     "land-general", //kurang protect liquidblock for 1.1.0
     "mods-general",
     "online-general",
+    "scorehud-general",
     //"clan-general", //unfinished
     /** @owner */ //untuk v1.1.0
     //"demote-owner",
@@ -28,7 +30,9 @@ export default [
     "warp-admin",
     "invsee-admin",
     "msb-admin",
+    "warn-admin",
     "mute-admin",
+    "scorehud-admin",
     "ban-admin",
     "kick-admin",
     "teleport-admin",

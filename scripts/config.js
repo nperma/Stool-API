@@ -3,7 +3,7 @@ const config = {
      * Configuration version - DO NOT CHANGE THIS!
      * @type {string}
      */
-    version: "1.0.5",
+    version: "1.0.6",
 
     /**
      * Creator or developer's name
@@ -66,12 +66,12 @@ const config = {
      * @type {string[]}
      */
     antibans: ["NpermaDev"],
-    
+
     /**
      * List of gamertags exempt from being kick
      * @type {string[]}
      **/
-     antikicks: ["NpermaDev"],
+    antikicks: ["NpermaDev"],
 
     /**
      * Starting balance for new players
@@ -97,19 +97,25 @@ const config = {
      * Prefix symbol for displaying rank in chat
      * @type {string}
      */
-    prefix_rank: "§7§l[ ",
+    prefix_rank: "§7§l[§r ",
 
     /**
      * Suffix symbol for displaying rank in chat
      * @type {string}
      */
-    suffix_rank: " §r§7§l]",
+    suffix_rank: " §r§7§l]§r",
+
+    /**
+     * Max Length String of Message
+     * @type {number}
+     */
+    maxLengthString: 600,
 
     /**
      * Chat format template, where @RANKS is the rank, @NAME is the username, and @MSG is the message
      * @type {string}
      */
-    default_format_chat: "@RANKS§r §a@NAME §r§7» §r@MSG",
+    default_format_chat: "@PREFIX@RANK@SUFFIX§r §a@NAME §r§7» §r@MSG",
 
     /**
      * List of words to be filtered as inappropriate language
@@ -216,6 +222,38 @@ const config = {
         sell_tax: 30
     },
 
+    /** Scorehud Settings */
+
+    scorehud: {
+        /**
+         * #NOTE
+         * this plugin need resource pack hud for showing scorehud title into sidehud
+ # list prefixs scorehud
+ - <name> @type {string} - show yoursef gamerTag
+ - <rank> @type {string} - show your currentRank
+ - <rank_count> @type {number} - show your ranks length
+ - <death_count> @type {number} - death counter
+ - <kill_count> @type {number} - kill counter
+ - <mute_count> @type {number} - mute counter
+ - <kick_count> @type {number} - kick counter
+ - <warn_count> @type {number} - warn counter
+ - <admin_count> @type {number} - admin register counter
+ - <admin_online_count> @type {number} - admin online counter
+ - <player_count> @type {number} - player register counter
+ - <player_online_count> @type {number} - player online counter
+ - <balance> @type {string} - show yourself balance 
+ - <afk_time> @type {number} - afkTime counter
+ - <locale_date> @type {string | Date.localeDateToString()} - show locale date
+ - <locale_time> @type {string | Date.localeTimeToString()} - show locale time
+       */
+
+        /**
+         * Tag to Navigation Scorehud Show
+         * @type {string}
+         */
+        tagToggle: "scorehud.toggle"
+    },
+
     /** AFK (Away From Keyboard) Settings */
 
     afk: {
@@ -264,6 +302,69 @@ const config = {
             "nigga",
             "alok"
         ]
+    },
+
+    /** Random Teleport Settings */
+
+    rtp: {
+        /**
+         * Teleport the Player if join the Server for first time.
+         * @type {boolean}
+         */
+        teleportWhenFirstJoin: false,
+
+        /**
+         * Center Location of Lobby Server, y set to null make location top most block
+         * @type {Vector3}
+         */
+        center: {
+            x: 0,
+            y: null,
+            z: 0
+        },
+
+        /**
+         * Range of Random Teleport
+         * @type {number}
+         */
+        teleportRange: 1000,
+
+        /**
+         * Random Teleport tag for support npc and command
+         * @type {string}
+         */
+        tag: "rtp",
+        
+        /**
+         * Random Teleport will cooldown after this rtp using
+         * @default after 5 rtp will trigger cooldown
+         * @type {number}
+         */
+         cooldownAfter: 5,
+         
+         /**
+          * Random Teleport Cooldown
+          * @type {number | second}
+          */
+          cooldown: 60,
+          
+
+        /**
+         * Dimension Random Teleport, only support dimension OVERWORLD
+         * @type {string}
+         */
+        dimension: "minecraft:overworld",
+
+        /**
+         * Teleport Message, option [actionbar,title,message]
+         * @type {string[option]}
+         */
+        messageOption: "message",
+
+        loading_rtp: "loading...",
+        title: "§7[ R T P ]", //support if use title option
+        subtitle: "§e{x} {y} {z}", //support if use title option
+        message: "§7Teleport to §a{x} {y} {z}"
     },
 
     /** Custom Messages */

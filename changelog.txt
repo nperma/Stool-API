@@ -1,0 +1,31 @@
+ServerTool v1.0.6 PATCH
+- adding properties rtp, Random Teleport Settings
+- adding plugin `rtp-general`
+- adding cooldown for rtp
+- adding plugin `warn-admin`
+- migrate CustomChat from index.js into chat-_system plugin
+- fixed format_chat replacement
+- fixed ranks replacement
+- update CustomChat with adding some prefix: @PREFIX prefix_rank display, @SUFFIX suffix rank display @RANK current Rank display, update @NAME
+- update format_chat: "@RANKS§r §a@NAME §r§7» §r@MSG" => "@PREFIX@RANK@SUFFIX§r §a@NAME §r§7» §r@MSG"
+- update notadmin message
+- update plugin `player-_system`
+- adding plugin `scorehud-general`
+- adding plugin `scorehud-admin`
+- list prefixs scorehud_display
+ - <name>
+ - <rank>
+ - <rank_count>
+ - <death_count>
+ - <kill_count>
+ - <mute_count>
+ - <kick_count>
+ - <warn_count>
+ - <admin_count>
+ - <admin_online_count>
+ - <player_count>
+ - <player_online_count>
+ - <balance>
+ - <afk_time>
+ - <locale_date>
+ - <locale_time>

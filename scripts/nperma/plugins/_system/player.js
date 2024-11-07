@@ -86,6 +86,18 @@ frik.static = (mc, { tools, database, config }) => {
         }
         return tools.setScore(this, objectiveName, value);
     };
+    
+    mc.world.afterEvents.entityHurt.subscribe(
+  ({ hurtEntity, damageSource }) => {
+    const player_db = database["player_db"]
+    const health = hurtEntity.getComponent("health");
+    if (health.currentValue > 0) return;
+    player_db.set(hurtEntity.name,{...player_db.get(hurtEntity.name),death: player_db.get(hurtEntity.name)?.death+1})
+    if (!(damageSource.damagingEntity instanceof Player)) return;
+    player_db.set(damageSource.damagingEntity.name,{...player_db.get(damageSource.damagingEntity.name),death: player_db.get(damageSource.damagingEntity.name)?.death+1})
+  },
+  { entityTypes: ["minecraft:player"] }
+);
 };
 
 export default frik;
