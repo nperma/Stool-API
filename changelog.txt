@@ -29,3 +29,22 @@ ServerTool v1.0.6 PATCH
  - <afk_time>
  - <locale_date>
  - <locale_time>
+ 
+ServerTool v1.1.0 (MINOR Update) UnReleased
+
+### What's New
+- adding folder documentation for doc
+
+### New Features
+- **tools.js**: Added several new functions:
+  - `Vector`
+  - `drawLine`
+  - `drawBox`
+  - `prefixReplacement`
+  - `isOnline`
+  - `isRegister`
+- **New Variable**: Introduced `vector` in `tools`.
+- **index.js**: Updated the `start` function.
+- **Custom Prefix Database**: Implemented `custom_prefix_db` for use with `chat-system`, `scorehud-admin`, and in `tools` with the `prefixReplacement` function.
+
+ServerTool 2.0.0 (Major Update)

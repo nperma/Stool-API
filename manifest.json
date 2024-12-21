@@ -2,7 +2,7 @@
     "format_version": 2,
     "header": {
         "name": "§l§6ServerTool§r§7",
-        "description": "VanillaType | new system essentials",
+        "description": "customHud | Scorehud",
         "uuid": "117b23ff-ea32-407e-9a30-c5f4a890d626",
         "version": [1, 0, 5],
         "min_engine_version": [1, 21, 40]
@@ -26,7 +26,7 @@
     "dependencies": [
         {
             "module_name": "@minecraft/server",
-            "version": "1.16.0-beta"
+            "version": "1.17.0-beta"
         },
         {
             "module_name": "@minecraft/server-ui",

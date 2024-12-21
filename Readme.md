@@ -1,5 +1,13 @@
-<h1 align="center">STOOL-API</h1>
-<p align="center">An API for Minecraft Bedrock Edition ScriptAPI development.</p>
+Here’s the updated `README.md` with the requested changes to include the `CONTEXT` usage in each plugin, with clear documentation in TypeScript style. The `CONTEXT` object is extended in every plugin attribute example to ensure consistency and integration with the global context.
+
+---
+
+# STOOL-API
+
+<p align="center">
+  <img src="https://img.shields.io/github/stars/nperma/STOOL-API?style=social" alt="Stars"/>
+  <a href="https://github.com/nperma/STOOL-API/issues/new">Report Issue</a>
+</p>
 
 **STOOL-API** is a feature-rich API for Minecraft Bedrock Edition ScriptAPI development, designed to facilitate server tool creation and improve player interaction through customizable and developer-friendly tools.
 
@@ -127,6 +135,14 @@ Find example plugins here: [plugins](https://github.com/nperma/Stool-API/tree/ma
 Define custom prefixes to allow commands to be triggered with multiple options.
 
 ```javascript
+/**
+ * Custom Prefix Command Example
+ * 
+ * @param {Object} ev - The event object for the command.
+ * @param {Object} CONTEXT - The global context containing required plugins and services.
+ * @param {string} CONTEXT.text - The text provided by the player.
+ * @param {Object} CONTEXT.mc - Minecraft-related API object for interaction with the world.
+ */
 let handler = function(ev, { text, mc }) {
   if (text) {
     mc.world.sendMessage(text);
@@ -148,6 +164,14 @@ export default handler;
 Restrict commands to admin users by setting `handler.admin = true`.
 
 ```javascript
+/**
+ * Admin Command Example
+ * 
+ * @param {Object} ev - The event object for the command.
+ * @param {Object} CONTEXT - The global context containing required plugins and services.
+ * @param {string} CONTEXT.text - The text to be broadcasted.
+ * @param {Object} CONTEXT.tools - Minecraft tools for additional game operations.
+ */
 let handler = function(ev, { sender, tools, text }) {
   tools.broadcast(`§d@${sender.name}§g: §e${text}`, `§5§l[§dMSB§5]§r §7»§r`);
 };
@@ -159,6 +183,88 @@ handler.category = "admin";
 
 export default handler;
 ```
+
+---
+
+### Custom Context Usage in Plugin Attributes
+
+For every plugin, it's essential to extend the `CONTEXT` object to provide access to Minecraft-specific data, databases, and more. Here's how to extend the `CONTEXT` in different parts of a plugin:
+
+#### Example: `plugin_after` attribute
+
+```javascript
+/**
+ * Example plugin after hook
+ * 
+ * @param {Object} ev - The event object for the hook.
+ * @param {Object} CONTEXT - The global context containing required plugins and services.
+ * @param {string} CONTEXT.text - The text provided by the player.
+ * @param {boolean} CONTEXT.isAdmin - Boolean indicating if the player is an admin.
+ * @param {Object} CONTEXT.tools - Minecraft tools for interaction with the game world.
+ */
+attr.after[plugin_after].call(this, ev, {
+  sender,
+  message,
+  attribute: usePlugin,
+  isAdmin,
+  isDev,
+  isOwner,
+  command: args?.slice(usePrefix.length ?? 0).shift().toLowerCase(),
+  prefix: usePrefix,
+  text: args.slice(0).join(" "),
+  ...CONTEXT
+});
+```
+
+#### Example: `plugin_static` attribute
+
+```javascript
+/**
+ * Example static plugin function
+ * 
+ * @param {Object} CONTEXT - The global context containing required plugins and services.
+ * @param {Object} CONTEXT.mc - Minecraft-related API object for interaction with the game world.
+ * @param {Set} CONTEXT.DEVS - Set of developer names.
+ * @param {Set} CONTEXT.OWNERS - Set of owner names.
+ */
+attr.static[plugin_static].call(this, {
+  ...CONTEXT,
+  DEVS,
+  OWNERS
+});
+```
+
+#### Example: `plugin_interval` attribute
+
+```javascript
+/**
+ * Example interval plugin function
+ * 
+ * @param {Object} CONTEXT - The global context containing required plugins and services.
+ * @param {Object} CONTEXT.mc - Minecraft-related API object for interaction with the game world.
+ * @param {Object} CONTEXT.player - The player object.
+ * @param {Set} CONTEXT.DEVS - Set of developer names.
+ * @param {Set} CONTEXT.OWNERS - Set of owner names.
+ */
+attr.interval[plugin_interval].call(this, {
+  player,
+  sender: player,
+  isAdmin: player.hasTag(config.admin_permission),
+  isDev: DEVS.has(player.name),
+  isOwner: OWNERS.has(player.name),
+  ...CONTEXT
+});
+```
+
+### Documentation for Context
+
+The `CONTEXT` object provides access to all necessary dependencies and services throughout your plugin's lifecycle. It's essential for your plugin to correctly reference and use the context, as shown in the examples above. The context is made up of various elements such as:
+
+- `mc` for Minecraft API interaction.
+- `tools` for additional helper tools.
+- `server` and `Database` for interacting with the server and database management.
+- `plugins` for managing plugin functionalities.
+- `attr` for accessing various plugin attributes like `default`, `static`, `after`, `interval`.
 
 ---
 
@@ -178,14 +284,4 @@ We welcome contributions to STOOL-API! Feel free to submit a pull request or ope
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-## Creator
-
-- [Nperma](https://github.com/nperma)
-
---- 
-
-This updated `README.md` provides clearer instructions and example handler code for implementing custom commands in STOOL-API.
+This project is licensed under the MIT License. See
